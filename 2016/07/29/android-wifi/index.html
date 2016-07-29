@@ -1,0 +1,641 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Wi-Fi," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="大纲
+Wifi传输概述
+WifiP2pManager类的介绍和使用
+Wifi热点创建相关技术
+基于Wifi的文件传输方法
+Demo的展示与介绍
+小结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓WiFi传输相关技术">
+<meta property="og:url" content="http://yoursite.com/2016/07/29/android-wifi/index.html">
+<meta property="og:site_name" content="Magican">
+<meta property="og:description" content="大纲
+Wifi传输概述
+WifiP2pManager类的介绍和使用
+Wifi热点创建相关技术
+基于Wifi的文件传输方法
+Demo的展示与介绍
+小结">
+<meta property="og:updated_time" content="2016-07-29T10:15:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓WiFi传输相关技术">
+<meta name="twitter:description" content="大纲
+Wifi传输概述
+WifiP2pManager类的介绍和使用
+Wifi热点创建相关技术
+基于Wifi的文件传输方法
+Demo的展示与介绍
+小结">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/29/android-wifi/"/>
+
+  <title> 安卓WiFi传输相关技术 | Magican </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Magican</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                安卓WiFi传输相关技术
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-29T18:10:38+08:00" content="2016-07-29">
+              2016-07-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><ol>
+<li>Wifi传输概述</li>
+<li><code>WifiP2pManager</code>类的介绍和使用</li>
+<li>Wifi热点创建相关技术</li>
+<li>基于Wifi的文件传输方法</li>
+<li>Demo的展示与介绍</li>
+<li>小结</li>
+</ol>
+<a id="more"></a>
+<h2 id="1-Wifi传输概述"><a href="#1-Wifi传输概述" class="headerlink" title="1. Wifi传输概述"></a>1. Wifi传输概述</h2><h3 id="1-1-步骤"><a href="#1-1-步骤" class="headerlink" title="1.1 步骤"></a>1.1 步骤</h3><ol>
+<li>发现对方IP地址：涉及<code>WifiP2pManager</code>和Wifi热点的创建</li>
+<li>监听端口，建立Socket通讯</li>
+<li>传输文件或其他信息</li>
+</ol>
+<h3 id="1-2-应用"><a href="#1-2-应用" class="headerlink" title="1.2 应用"></a>1.2 应用</h3><ol>
+<li>应用、照片、视频等文件的分发和传输</li>
+<li>手机与手机，手机与PC网页的通讯、文件传输</li>
+</ol>
+<h2 id="2-WifiP2pManager类的介绍和使用"><a href="#2-WifiP2pManager类的介绍和使用" class="headerlink" title="2. WifiP2pManager类的介绍和使用"></a>2. <code>WifiP2pManager</code>类的介绍和使用</h2><p>该<a href="http://developer.android.com/intl/zh-cn/reference/android/net/wifi/p2p/WifiP2pManager.html" target="_blank" rel="external">方法</a>提供了对<strong>WiFi peer-to-peer</strong>传输的管理API，从而使得应用可以发现可用的peer，设置到peer的连接以及查询peer列表。本质上其功能也可以通过UDP广播实现。</p>
+<h3 id="2-1-简介"><a href="#2-1-简介" class="headerlink" title="2.1 简介"></a>2.1 简介</h3><p>WiFi p2p常用方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Initialization </span></div><div class="line"><span class="function"><span class="keyword">public</span> Channel <span class="title">initialize</span><span class="params">(Context srcContext, Looper srcLooper, ChannelListener listener)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connect</span><span class="params">(Channel c, WifiP2pConfig config, ActionListener listener)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">discoverPeers</span><span class="params">(Channel c, ActionListener listener)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createGroup</span><span class="params">(Channel c, ActionListener listener)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// Request Info</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestPeers</span><span class="params">(Channel c, PeerListListener listener)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestConnectionInfo</span><span class="params">(Channel c, ConnectionInfoListener listener)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestGroupInfo</span><span class="params">(Channel c, GroupInfoListener listener)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
+<p>WiFi p2p常用监听器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ActionListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> reason)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PeerListListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPeersAvailable</span><span class="params">(WifiP2pDeviceList peers)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ChannelListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChannelDisconnected</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ConnectionInfoListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConnectionInfoAvailable</span><span class="params">(WifiP2pInfo info)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GroupInfoListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGroupInfoAvailable</span><span class="params">(WifiP2pGroup group)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ServiceResponseListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceAvailable</span><span class="params">(<span class="keyword">int</span> protocolType,</span></span></div><div class="line">            <span class="keyword">byte</span>[] responseData, WifiP2pDevice srcDevice);</div><div class="line">&#125;</div><div class="line"><span class="comment">// ...</span></div><div class="line">~~~   </div><div class="line"></div><div class="line">WiFi p2p Intent</div><div class="line"></div><div class="line">~~~java</div><div class="line"><span class="meta">@SdkConstant</span>(SdkConstantType.BROADCAST_INTENT_ACTION)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String WIFI_P2P_CONNECTION_CHANGED_ACTION;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String WIFI_P2P_PEERS_CHANGED_ACTION;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String WIFI_P2P_STATE_CHANGED_ACTION;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String WIFI_P2P_THIS_DEVICE_CHANGED_ACTION;</div></pre></td></tr></table></figure>
+<h3 id="2-2-初始化"><a href="#2-2-初始化" class="headerlink" title="2.2 初始化"></a>2.2 初始化</h3><h4 id="2-2-1-对wifi-p2p-intent广播进行监听"><a href="#2-2-1-对wifi-p2p-intent广播进行监听" class="headerlink" title="2.2.1 对wifi p2p intent广播进行监听"></a>2.2.1 对wifi p2p intent广播进行监听</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WiFiDirectBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> WifiP2pManager mManager;</div><div class="line">    <span class="keyword">private</span> Channel mChannel;</div><div class="line">    <span class="keyword">private</span> MyWiFiActivity mActivity;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WiFiDirectBroadcastReceiver</span><span class="params">(WifiP2pManager manager, Channel channel,</span></span></div><div class="line">            MyWifiActivity activity) &#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.mManager = manager;</div><div class="line">        <span class="keyword">this</span>.mChannel = channel;</div><div class="line">        <span class="keyword">this</span>.mActivity = activity;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        String action = intent.getAction();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) &#123;</div><div class="line">            <span class="comment">// Check to see if Wi-Fi is enabled and notify appropriate activity</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) &#123;</div><div class="line">            <span class="comment">// Call WifiP2pManager.requestPeers() to get a list of current peers</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) &#123;</div><div class="line">            <span class="comment">// Respond to new connection or disconnections</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) &#123;</div><div class="line">            <span class="comment">// Respond to this device's wifi state changing</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-2-2-创建wifi-p2p应用"><a href="#2-2-2-创建wifi-p2p应用" class="headerlink" title="2.2.2 创建wifi p2p应用"></a>2.2.2 创建wifi p2p应用</h4><ol>
+<li>申请权限</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-sdk</span> <span class="attr">android:minSdkVersion</span>=<span class="string">"14"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.CHANGE_WIFI_STATE"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.CHANGE_NETWORK_STATE"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<ol>
+<li>初始化<code>WiFiP2PManager</code>，设置<code>IntentFilter</code>并注册广播接收对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">IntentFilter mIntentFilter;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;</div><div class="line">    mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);</div><div class="line">    mChannel = mManager.initialize(<span class="keyword">this</span>, getMainLooper(), <span class="keyword">null</span>);</div><div class="line">    mReceiver = <span class="keyword">new</span> WiFiDirectBroadcastReceiver(mManager, mChannel, <span class="keyword">this</span>);</div><div class="line">    </div><div class="line">    mIntentFilter = <span class="keyword">new</span> IntentFilter();</div><div class="line">    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);</div><div class="line">    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);</div><div class="line">    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);</div><div class="line">    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onResume();</div><div class="line">    registerReceiver(mReceiver, mIntentFilter);</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onPause();</div><div class="line">    unregisterReceiver(mReceiver);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-3-发现方法"><a href="#2-3-发现方法" class="headerlink" title="2.3 发现方法"></a>2.3 发现方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Descover methods</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">discoverPeers</span><span class="params">(Channel c, ActionListener listener)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">discoverServices</span><span class="params">(Channel c, ActionListener listener)</span>；</span></div><div class="line"></div><div class="line"><span class="comment">// Listeners</span></div><div class="line"><span class="keyword">public</span> interface ActionListener &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">()</span></span>;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> reason)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-Wifi热点创建相关技术"><a href="#3-Wifi热点创建相关技术" class="headerlink" title="3. Wifi热点创建相关技术"></a>3. Wifi热点创建相关技术</h2><p>安卓系统将热点控制API设置为<code>@hide</code>属性，需要使用反射机制调用。Wifi热点的创建相关技术主要分为两步：</p>
+<ol>
+<li><p>创建<code>WifiConfiguration</code>， 调用<code>setWifiApEnabled</code>函数讲配置文件写入系统，从而开启Wifi热点。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">createWifiAp</span><span class="params">(String ssid, String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mWifiManager.isWifiEnabled()) &#123;</div><div class="line">            mWifiManager.setWifiEnabled(<span class="keyword">false</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mNetConfig = <span class="keyword">new</span> WifiConfiguration();</div><div class="line"></div><div class="line">        mNetConfig.SSID = ssid;</div><div class="line">        mNetConfig.preSharedKey = password;</div><div class="line">        mNetConfig.status = WifiConfiguration.Status.ENABLED;</div><div class="line">        mNetConfig.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);</div><div class="line">        mNetConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);</div><div class="line">        mNetConfig.allowedProtocols.set(WifiConfiguration.Protocol.WPA);</div><div class="line">        mNetConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);</div><div class="line">        mNetConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);</div><div class="line">        mNetConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);</div><div class="line">        mNetConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);</div><div class="line">        mNetConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);<span class="comment">//NONE);</span></div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Method setWifiApMethod = mWifiManager.getClass().getMethod(<span class="string">"setWifiApEnabled"</span>, WifiConfiguration.class, <span class="keyword">boolean</span>.class);</div><div class="line">            <span class="keyword">boolean</span> apstatus = (Boolean) setWifiApMethod.invoke(mWifiManager, mNetConfig, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">            Method isWifiApEnabledmethod = mWifiManager.getClass().getMethod(<span class="string">"isWifiApEnabled"</span>);</div><div class="line">            <span class="keyword">while</span> (!(Boolean) isWifiApEnabledmethod.invoke(mWifiManager)) &#123;</div><div class="line">            &#125;</div><div class="line">            ;</div><div class="line">            Method getWifiApStateMethod = mWifiManager.getClass().getMethod(<span class="string">"getWifiApState"</span>);</div><div class="line">            <span class="keyword">int</span> apstate = (Integer) getWifiApStateMethod.invoke(mWifiManager);</div><div class="line">            Method getWifiApConfigurationMethod = mWifiManager.getClass().getMethod(<span class="string">"getWifiApConfiguration"</span>);</div><div class="line">            mNetConfig = (WifiConfiguration) getWifiApConfigurationMethod.invoke(mWifiManager);</div><div class="line">            Log.d(<span class="string">"CLIENT"</span>, <span class="string">"\nSSID:"</span> + mNetConfig.SSID + <span class="string">"\nPassword:"</span> + mNetConfig.preSharedKey + <span class="string">"\n"</span>);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            Log.e(TAG, e.toString());</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载端连接后，扫描<code>/proc/net/arp</code>文件获取连接到主机的IP。当然也可以等下载机访问我们指定的主机网址，再通过请求知道下载机的IP地址，这里暂不累述。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">/**</span></div><div class="line"> * Gets a list of the clients connected to the Hotspot </div><div class="line"> * <span class="doctag">@param</span> onlyReachables &#123;<span class="doctag">@code</span> false&#125; if the list should contain unreachable (probably disconnected) clients, &#123;<span class="doctag">@code</span> true&#125; otherwise</div><div class="line"> * <span class="doctag">@param</span> reachableTimeout Reachable Timout in miliseconds</div><div class="line"> * <span class="doctag">@param</span> finishListener, Interface called when the scan method finishes </div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getClientList</span><span class="params">(<span class="keyword">final</span> <span class="keyword">boolean</span> onlyReachables, <span class="keyword">final</span> <span class="keyword">int</span> reachableTimeout, <span class="keyword">final</span> FinishScanListener finishListener)</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">	Runnable runnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">			BufferedReader br = <span class="keyword">null</span>;</div><div class="line">			<span class="keyword">final</span> ArrayList&lt;ClientScanResult&gt; result = <span class="keyword">new</span> ArrayList&lt;ClientScanResult&gt;();</div><div class="line">			</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"/proc/net/arp"</span>));</div><div class="line">				String line;</div><div class="line">				<span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">					String[] splitted = line.split(<span class="string">" +"</span>);</div><div class="line"></div><div class="line">					<span class="keyword">if</span> ((splitted != <span class="keyword">null</span>) &amp;&amp; (splitted.length &gt;= <span class="number">4</span>)) &#123;</div><div class="line">						<span class="comment">// Basic sanity check</span></div><div class="line">						String mac = splitted[<span class="number">3</span>];</div><div class="line"></div><div class="line">						<span class="keyword">if</span> (mac.matches(<span class="string">"..:..:..:..:..:.."</span>)) &#123;</div><div class="line">							<span class="keyword">boolean</span> isReachable = InetAddress.getByName(splitted[<span class="number">0</span>]).isReachable(reachableTimeout);</div><div class="line"></div><div class="line">							<span class="keyword">if</span> (!onlyReachables || isReachable) &#123;</div><div class="line">								result.add(<span class="keyword">new</span> ClientScanResult(splitted[<span class="number">0</span>], splitted[<span class="number">3</span>], splitted[<span class="number">5</span>], isReachable));</div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">				Log.e(<span class="keyword">this</span>.getClass().toString(), e.toString());</div><div class="line">			&#125; <span class="keyword">finally</span> &#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					br.close();</div><div class="line">				&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">					Log.e(<span class="keyword">this</span>.getClass().toString(), e.getMessage());</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// Get a handler that can be used to post to the main thread</span></div><div class="line">			Handler mainHandler = <span class="keyword">new</span> Handler(context.getMainLooper());</div><div class="line">			Runnable myRunnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">				<span class="meta">@Override</span></div><div class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">					finishListener.onFinishScan(result);</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">			mainHandler.post(myRunnable);</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	Thread mythread = <span class="keyword">new</span> Thread(runnable);</div><div class="line">	mythread.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="4-基于Wifi的文件传输方法"><a href="#4-基于Wifi的文件传输方法" class="headerlink" title="4. 基于Wifi的文件传输方法"></a>4. 基于Wifi的文件传输方法</h2><p>基于WiFi的数据传输主要有两个技术点：一方面是文件传输，另一方面是下载端的网页实时获得文件传输的进度。前者可以直接使用<code>ServerSocket</code>实现，后者对于双方均安装我们的下载app的情况没有难度，但对于一边是app发送文件，一边是网页打开连接下载文件，就需要基于<strong><code>JavaScript</code></strong>的<code>XMLHttpRequest</code>可以实现主机和下载机网页的信息交流。</p>
+<h3 id="4-1-使用ServerSocket传输数据"><a href="#4-1-使用ServerSocket传输数据" class="headerlink" title="4.1 使用ServerSocket传输数据"></a>4.1 使用<code>ServerSocket</code>传输数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Sends the HTTP response to the client, including headers (as applicable)</div><div class="line"> * and content.</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processRequest</span><span class="params">(Socket client)</span> <span class="keyword">throws</span> IllegalStateException, IOException </span>&#123;</div><div class="line">    Log.e(TAG, <span class="string">"Starting to process request"</span>);</div><div class="line">    client.setKeepAlive(<span class="keyword">true</span>);</div><div class="line">    InputStream is = client.getInputStream();</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> bufsize = <span class="number">8192</span>;</div><div class="line">    <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[bufsize];</div><div class="line">    <span class="keyword">int</span> splitbyte = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> rlen = <span class="number">0</span>;</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> read = is.read(buf, <span class="number">0</span>, bufsize);</div><div class="line">        <span class="keyword">while</span> (read &gt; <span class="number">0</span>) &#123;</div><div class="line">            rlen += read;</div><div class="line">            splitbyte = findHeaderEnd(buf, rlen);</div><div class="line">            <span class="keyword">if</span> (splitbyte &gt; <span class="number">0</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            read = is.read(buf, rlen, bufsize - rlen);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Create a BufferedReader for parsing the header.</span></div><div class="line">    ByteArrayInputStream hbis = <span class="keyword">new</span> ByteArrayInputStream(buf, <span class="number">0</span>, rlen);</div><div class="line">    BufferedReader hin = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(hbis));</div><div class="line">    Properties pre = <span class="keyword">new</span> Properties();</div><div class="line">    Properties parms = <span class="keyword">new</span> Properties();</div><div class="line">    Properties header = <span class="keyword">new</span> Properties();</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        decodeHeader(hin, pre, parms, header);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e1) &#123;</div><div class="line">        Log.e(TAG, <span class="string">"Exception: "</span> + e1.getMessage());</div><div class="line">        e1.printStackTrace();</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    String range = header.getProperty(<span class="string">"range"</span>);</div><div class="line">    cbSkip = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span> (range != <span class="keyword">null</span>) &#123;</div><div class="line">        Log.e(TAG, <span class="string">"range is: "</span> + range);</div><div class="line">        range = range.substring(<span class="number">6</span>);</div><div class="line">        <span class="keyword">int</span> charPos = range.indexOf(<span class="string">'-'</span>);</div><div class="line">        <span class="keyword">if</span> (charPos &gt; <span class="number">0</span>) &#123;</div><div class="line">            range = range.substring(<span class="number">0</span>, charPos);</div><div class="line">        &#125;</div><div class="line">        cbSkip = Long.parseLong(range);</div><div class="line">        Log.i(TAG, <span class="string">"range found!! "</span> + cbSkip);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    sendHTMLtext(HTMLManager.getDownloadingHTML(), client.getOutputStream());</div><div class="line">    mSendState = SEND_STATE_SENDING;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendHTMLtext</span><span class="params">(String htmlStr, OutputStream outputStream)</span> </span>&#123;</div><div class="line">    PrintWriter printWriter = <span class="keyword">new</span> PrintWriter(outputStream);</div><div class="line">    printWriter.println(htmlStr);</div><div class="line">    printWriter.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-2-使用XMLHttpRequest在网页上实时获取下载进度"><a href="#4-2-使用XMLHttpRequest在网页上实时获取下载进度" class="headerlink" title="4.2 使用XMLHttpRequest在网页上实时获取下载进度"></a>4.2 使用<code>XMLHttpRequest</code>在网页上实时获取下载进度</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> XMLHttpRequest;</div><div class="line"><span class="keyword">var</span> url = <span class="string">"http://192.168.43.1:8080"</span>;</div><div class="line"><span class="keyword">var</span> timer = setInterval(<span class="string">"loadurl(url)"</span>, <span class="number">500</span>); <span class="comment">// 定时请求刷新</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadurl</span>(<span class="params">url</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (xmlhttp != <span class="literal">null</span>) &#123;</div><div class="line">            xmlhttp.onreadystatechange = state_Change;</div><div class="line">            xmlhttp.open(<span class="string">"GET"</span>, url, <span class="literal">true</span>);</div><div class="line">            xmlhttp.send(<span class="literal">null</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            alert(<span class="string">"Your browser does not support XMLHTTP."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">state_Change</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> infoBar = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"cube"</span>)[<span class="number">0</span>];</div><div class="line">    <span class="keyword">if</span> (xmlhttp.responseText == <span class="string">""</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">var</span> percent = <span class="built_in">parseInt</span>(xmlhttp.responseText.substring(<span class="number">0</span>, <span class="number">3</span>));</div><div class="line">    <span class="keyword">if</span> (percent != <span class="literal">NaN</span>) &#123;</div><div class="line">        infoBar.innerHTML = xmlhttp.responseText; <span class="comment">// 刷新DOM元素</span></div><div class="line">        <span class="keyword">if</span> (percent == <span class="number">100</span>) &#123;</div><div class="line">            clearInterval(timer);</div><div class="line">            infoBar.innerHTML = <span class="string">"Complete. Please install it."</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-Demo的展示与介绍"><a href="#5-Demo的展示与介绍" class="headerlink" title="5. Demo的展示与介绍"></a>5. Demo的展示与介绍</h2><p>wifi热点的创建和文件传输</p>
+<h2 id="6-小结"><a href="#6-小结" class="headerlink" title="6. 小结"></a>6. 小结</h2><h3 id="6-1-基于安卓的wifi传输-能做到什么-？"><a href="#6-1-基于安卓的wifi传输-能做到什么-？" class="headerlink" title="6.1 基于安卓的wifi传输 ==能做到什么==？"></a>6.1 基于安卓的wifi传输 ==能做到什么==？</h3><ol>
+<li>局域网内，安装我们APP的手机之间的互相发现和连接</li>
+<li>热点的创建和定制</li>
+<li>免流量的高速、稳定的数据传输，相对于蓝牙和NFC具有很大优势</li>
+<li>一方安装了APP，另一方仍可通过热点连接，基于网页JS实现与主机APP的信息交互</li>
+</ol>
+<h3 id="6-2-基于安卓的wifi传输-不能做到什么-？-有哪些坑-？"><a href="#6-2-基于安卓的wifi传输-不能做到什么-？-有哪些坑-？" class="headerlink" title="6.2 基于安卓的wifi传输 ==不能做到什么==？==有哪些坑==？"></a>6.2 基于安卓的wifi传输 ==不能做到什么==？==有哪些坑==？</h3><ol>
+<li>没有底层权限，很多服务器常见的设置都无法完成，比如无法设置<code>IPTable</code></li>
+<li>安卓网页的局限，浏览器对JS的支持性和PC端不同，需要额外设计</li>
+<li>部分安卓厂商自己修改了官方的热点API，比如HTC，这使得在这些手机上创建热点需要额外配置</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Wi-Fi/" rel="tag">#Wi-Fi</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/29/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xuyang Hu" />
+          <p class="site-author-name" itemprop="name">Xuyang Hu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#大纲"><span class="nav-number">1.</span> <span class="nav-text">大纲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Wifi传输概述"><span class="nav-number">2.</span> <span class="nav-text">1. Wifi传输概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-步骤"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-应用"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-WifiP2pManager类的介绍和使用"><span class="nav-number">3.</span> <span class="nav-text">2. WifiP2pManager类的介绍和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-简介"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-初始化"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-对wifi-p2p-intent广播进行监听"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1 对wifi p2p intent广播进行监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-创建wifi-p2p应用"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2 创建wifi p2p应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-发现方法"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 发现方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Wifi热点创建相关技术"><span class="nav-number">4.</span> <span class="nav-text">3. Wifi热点创建相关技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-基于Wifi的文件传输方法"><span class="nav-number">5.</span> <span class="nav-text">4. 基于Wifi的文件传输方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-使用ServerSocket传输数据"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 使用ServerSocket传输数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-使用XMLHttpRequest在网页上实时获取下载进度"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 使用XMLHttpRequest在网页上实时获取下载进度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Demo的展示与介绍"><span class="nav-number">6.</span> <span class="nav-text">5. Demo的展示与介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-小结"><span class="nav-number">7.</span> <span class="nav-text">6. 小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-基于安卓的wifi传输-能做到什么-？"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 基于安卓的wifi传输 ==能做到什么==？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-基于安卓的wifi传输-不能做到什么-？-有哪些坑-？"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 基于安卓的wifi传输 ==不能做到什么==？==有哪些坑==？</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuyang Hu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
