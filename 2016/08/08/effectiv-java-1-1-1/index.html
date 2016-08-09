@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。
-0x01 静态工厂方法1. 方法示例：123public static Boolean valueOf(boolean b) &amp;#123;	retur">
+<meta name="description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effective Java - 1.1 类的创建">
 <meta property="og:url" content="http://thundertrick.github.io/2016/08/08/effectiv-java-1-1-1/index.html">
 <meta property="og:site_name" content="Magican">
-<meta property="og:description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。
-0x01 静态工厂方法1. 方法示例：123public static Boolean valueOf(boolean b) &amp;#123;	retur">
-<meta property="og:updated_time" content="2016-08-08T12:14:11.000Z">
+<meta property="og:description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。">
+<meta property="og:updated_time" content="2016-08-08T12:15:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Java - 1.1 类的创建">
-<meta name="twitter:description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。
-0x01 静态工厂方法1. 方法示例：123public static Boolean valueOf(boolean b) &amp;#123;	retur">
+<meta name="twitter:description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。">
 
 
 
@@ -270,6 +267,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/08/effectiv-java-1-1-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/08/effectiv-java-1-1-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -290,6 +294,7 @@
 
       
         <p>获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。</p>
+<a id="more"></a>
 <h2 id="0x01-静态工厂方法"><a href="#0x01-静态工厂方法" class="headerlink" title="0x01 静态工厂方法"></a>0x01 静态工厂方法</h2><h3 id="1-方法示例："><a href="#1-方法示例：" class="headerlink" title="1. 方法示例："></a>1. 方法示例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> b ? Boolean.TRUE : Boolean.FALSE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="2-优点："><a href="#2-优点：" class="headerlink" title="2. 优点："></a>2. 优点：</h3><ol>
 <li><strong>有名称</strong>。构造器实际上只能用类名命名，无法更多地描述构造信息。并且实际使用中，同一个类常有数个不同的构造方法，如果不加以区分（缺少必要注释）则很容易使用错误。而静态工厂方法，可以使用方法名去描述构造实例的更多信息，易于区分。</li>
@@ -376,6 +381,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -574,6 +586,27 @@
 
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'http-thundertrick-github-io';
+      var disqus_identifier = '2016/08/08/effectiv-java-1-1-1/';
+      var disqus_title = "Effective Java - 1.1 类的创建";
+      var disqus_url = 'http://thundertrick.github.io/2016/08/08/effectiv-java-1-1-1/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
 
