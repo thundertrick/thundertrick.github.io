@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android,java," />
+  <meta name="keywords" content="Android,Facebook," />
 
 
 
@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。">
+<meta name="description" content="Solutions for some bugs I met when using Facebook LikeView. The docs of Facebook SDK is totally #@!$#@!$!
+Official Reference: LikeView Reference">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java - 1.1 类的创建">
-<meta property="og:url" content="http://thundertrick.github.io/2016/08/08/effectiv-java-1-1-1/index.html">
+<meta property="og:title" content="Facebook Android SDK Tips Part 1 LikeView Bugs and Fixes">
+<meta property="og:url" content="http://thundertrick.github.io/2016/08/15/facebook-sdk-tips/index.html">
 <meta property="og:site_name" content="Magican">
-<meta property="og:description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。">
-<meta property="og:updated_time" content="2016-08-08T12:15:29.000Z">
+<meta property="og:description" content="Solutions for some bugs I met when using Facebook LikeView. The docs of Facebook SDK is totally #@!$#@!$!
+Official Reference: LikeView Reference">
+<meta property="og:updated_time" content="2016-08-15T12:05:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Effective Java - 1.1 类的创建">
-<meta name="twitter:description" content="获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。">
+<meta name="twitter:title" content="Facebook Android SDK Tips Part 1 LikeView Bugs and Fixes">
+<meta name="twitter:description" content="Solutions for some bugs I met when using Facebook LikeView. The docs of Facebook SDK is totally #@!$#@!$!
+Official Reference: LikeView Reference">
 
 
 
@@ -114,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://thundertrick.github.io/2016/08/08/effectiv-java-1-1-1/"/>
+  <link rel="canonical" href="http://thundertrick.github.io/2016/08/15/facebook-sdk-tips/"/>
 
-  <title> Effective Java - 1.1 类的创建 | Magican </title>
+  <title> Facebook Android SDK Tips Part 1 LikeView Bugs and Fixes | Magican </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -246,7 +249,7 @@
             
             
               
-                Effective Java - 1.1 类的创建
+                Facebook Android SDK Tips Part 1 LikeView Bugs and Fixes
               
             
           </h1>
@@ -258,8 +261,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-08T20:13:19+08:00" content="2016-08-08">
-              2016-08-08
+            <time itemprop="dateCreated" datetime="2016-08-15T19:59:17+08:00" content="2016-08-15">
+              2016-08-15
             </time>
           </span>
 
@@ -269,8 +272,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/08/effectiv-java-1-1-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/08/effectiv-java-1-1-1/" itemprop="commentsCount"></span>
+                <a href="/2016/08/15/facebook-sdk-tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/15/facebook-sdk-tips/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -293,30 +296,24 @@
       
 
       
-        <p>获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。</p>
+        <p>Solutions for some bugs I met when using Facebook LikeView. The docs of Facebook SDK is totally #@!$#@!$!</p>
+<p>Official Reference: <a href="https://developers.facebook.com/docs/reference/android/current/class/LikeView" target="_blank" rel="external">LikeView Reference</a></p>
 <a id="more"></a>
-<h2 id="0x01-静态工厂方法"><a href="#0x01-静态工厂方法" class="headerlink" title="0x01 静态工厂方法"></a>0x01 静态工厂方法</h2><h3 id="1-方法示例："><a href="#1-方法示例：" class="headerlink" title="1. 方法示例："></a>1. 方法示例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> b ? Boolean.TRUE : Boolean.FALSE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="2-优点："><a href="#2-优点：" class="headerlink" title="2. 优点："></a>2. 优点：</h3><ol>
-<li><strong>有名称</strong>。构造器实际上只能用类名命名，无法更多地描述构造信息。并且实际使用中，同一个类常有数个不同的构造方法，如果不加以区分（缺少必要注释）则很容易使用错误。而静态工厂方法，可以使用方法名去描述构造实例的更多信息，易于区分。</li>
-<li><strong>不必每次调用都创建一个新的对象</strong>。重复调用可以利用好预先构建好的实例，从而减少了重复创建的开支。这点我目前的理解是静态工厂方法类内部可以调用其他的单例实例。</li>
-<li><strong>可以返回原类型的任何子类型</strong>。这样在选择返回对象时就有了更大的灵活性。</li>
-<li><strong>创建参数化实例时代码更加简洁</strong>。举例说明，原始代码：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, List&lt;String&gt;&gt; m = <span class="keyword">new</span> HashMap&lt;String, List&lt;String&gt;&gt;;</div></pre></td></tr></table></figure>
-<p>假设<code>HashMap</code>提供了这样的静态工厂方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K, V&gt; <span class="function">HashMap&lt;K, V&gt; <span class="title">newInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> HashMap&lt;K, V&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么原始代码就可以简化为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, List&lt;String&gt;&gt; m = HashMap.newInstance();</div></pre></td></tr></table></figure>
-<h3 id="3-缺点："><a href="#3-缺点：" class="headerlink" title="3. 缺点："></a>3. 缺点：</h3><ol>
-<li>类如果不含公有的或者受保护的构造器，就不能被子类化。</li>
-<li>与其他静态方法没有本质上的区别。这个主要是对JavaDoc不友好，无法像构造方法一样被标识。</li>
-</ol>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>静态工厂方法常用的方法名称如下：</p>
+<p>##BUG 0x01: The developers or testers cannot access the Like Page</p>
 <ol>
-<li><code>valueOf</code>, <code>of</code></li>
-<li><code>getInstance</code>, <code>newInstance</code></li>
-<li><code>getType</code>, <code>newType</code></li>
+<li>Check the internet connection.</li>
+<li>Check if the page is allowed to be liked.</li>
+<li>Check the account of developers or testers have the permission of developer or tester under the APP ID.</li>
+<li>Check Facebook App support before initialize LikeView, and DO NOT just check the installation of Facebook App. For some lower version of Facebook App, things may not work properly. Using SDK for checking as following:</li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">15</span>) &#123;</div><div class="line">    <span class="keyword">if</span> (LikeDialog.canShowNativeDialog() || LikeDialog.canShowWebFallback()) &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="BUG-0x02-Crash-when-initializing"><a href="#BUG-0x02-Crash-when-initializing" class="headerlink" title="BUG 0x02: Crash when initializing"></a>BUG 0x02: Crash when initializing</h2><ol>
+<li>DO NOT initialize LikeView in your layout.xml as the Official guide recommended, which is unsafe for API level &lt; 15. ( min version for FB SDK 4.10 ) All of the FB SDK method should be used after API level judgement.</li>
+<li>If you only want to open LikeDialog in Facebook App and only use <code>LikeDialog.canShowNativeDialog()</code> for judgement, LikeDialog may fail to open after swipe all the data of Facebook App. I recommend to use web dialog just in case.</li>
+</ol>
+<h2 id="BUG-0x03-Crash-in-onActivityResult"><a href="#BUG-0x03-Crash-in-onActivityResult" class="headerlink" title="BUG 0x03: Crash in onActivityResult()"></a>BUG 0x03: Crash in onActivityResult()</h2><p>Stack overflow give a way to get the like result in onActivityResult() method. But it should add a <code>data != null</code> judgment, otherwise app will crash when not data returns.</p>
+<h2 id="BUG-0x04-Native-Like-Button-permission"><a href="#BUG-0x04-Native-Like-Button-permission" class="headerlink" title="BUG 0x04: Native Like Button permission"></a>BUG 0x04: Native Like Button permission</h2><p>App Review should be done to get Native Like Button permission. Otherwise, only developers and test users can access like button.</p>
+<p>(Moved from <a href="http://huxyz.blogspot.com/2016/03/facebook-android-sdk-tips-part-1.html" target="_blank" rel="external">another blog site of my</a>)</p>
 
       
     </div>
@@ -339,9 +336,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag">#android</a>
+            <a href="/tags/Android/" rel="tag">#Android</a>
           
-            <a href="/tags/java/" rel="tag">#java</a>
+            <a href="/tags/Facebook/" rel="tag">#Facebook</a>
           
         </div>
       
@@ -350,17 +347,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/29/android-wifi/" rel="next" title="安卓WiFi传输相关技术">
-                <i class="fa fa-chevron-left"></i> 安卓WiFi传输相关技术
+              <a href="/2016/08/12/buck-test/" rel="next" title="Buck 安装配置与测试">
+                <i class="fa fa-chevron-left"></i> Buck 安装配置与测试
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/12/buck-test/" rel="prev" title="Buck 安装配置与测试">
-                Buck 安装配置与测试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -474,7 +467,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-静态工厂方法"><span class="nav-number">1.</span> <span class="nav-text">0x01 静态工厂方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-方法示例："><span class="nav-number">1.1.</span> <span class="nav-text">1. 方法示例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-优点："><span class="nav-number">1.2.</span> <span class="nav-text">2. 优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-缺点："><span class="nav-number">1.3.</span> <span class="nav-text">3. 缺点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.4.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUG-0x02-Crash-when-initializing"><span class="nav-number">1.</span> <span class="nav-text">BUG 0x02: Crash when initializing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUG-0x03-Crash-in-onActivityResult"><span class="nav-number">2.</span> <span class="nav-text">BUG 0x03: Crash in onActivityResult()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUG-0x04-Native-Like-Button-permission"><span class="nav-number">3.</span> <span class="nav-text">BUG 0x04: Native Like Button permission</span></a></li></ol></div>
             
           </div>
         </section>
@@ -594,9 +587,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'http-thundertrick-github-io';
-      var disqus_identifier = '2016/08/08/effectiv-java-1-1-1/';
-      var disqus_title = "Effective Java - 1.1 类的创建";
-      var disqus_url = 'http://thundertrick.github.io/2016/08/08/effectiv-java-1-1-1/';
+      var disqus_identifier = '2016/08/15/facebook-sdk-tips/';
+      var disqus_title = "Facebook Android SDK Tips Part 1 LikeView Bugs and Fixes";
+      var disqus_url = 'http://thundertrick.github.io/2016/08/15/facebook-sdk-tips/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
