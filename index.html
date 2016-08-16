@@ -273,6 +273,114 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/16/hexo-search-engine-vertify/" itemprop="url">
+                  HEXO next 主题增加搜索引擎验证
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-16T12:20:19+08:00" content="2016-08-16">
+              2016-08-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/16/hexo-search-engine-vertify/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/16/hexo-search-engine-vertify/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Github 上利用 hexo 建立的博客是无法被搜索引擎搜索到的。Github 本身也不会将信息提交给引擎。所以，为了让博客信息被检索到，我们需要手动将博客网站提交给搜索引擎并验证，实际上就是验证网站是我们自己的。对 hexo 比较友好的验证方法包括：</p>
+<ol>
+<li>文件验证：将一个 html 文件配置到 source 目录下，使之可以访问并获取其中的字符串。</li>
+<li>HTML meta 标签验证：在主页的 html 头里增加一个 meta 标签，记录搜索引擎提供的字符串。</li>
+</ol>
+<p>如果使用了 Next 主题，source 目录下所有的 html 都会按主题模板化，这使得文件验证生成的页面中字符串无法被搜索引擎识别。虽然理论上可以对单独的地址进行模板屏蔽，但一个网站冷不丁冒出来一个风格迥异的页面还是不能让人接受。所以，我最后选择了 HTML meta 标签验证方法。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/16/hexo-search-engine-vertify/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/15/facebook-sdk-tips/" itemprop="url">
                   Facebook Android SDK Tips Part 1 LikeView Bugs and Fixes
                 </a>
@@ -825,7 +933,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -835,7 +943,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
