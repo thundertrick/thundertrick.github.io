@@ -1,456 +1,196 @@
-<!doctype html>
-
-
-
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Magican</title>
+  <subtitle>Programming is Magica</subtitle>
+  <link href="/atom.xml" rel="self"/>
   
-
-
-<html class="theme-next muse use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="IQs30MFrhmrm-Nfmv-_neEbXELyUuxvZtdin1ALJ4aA" />
-
-
-
-
-  <meta name="baidu-site-verification" content="H1J5y75sN7" />
-
-
-
-
-
-
-
+  <link href="http://thundertrick.github.io/"/>
+  <updated>2016-08-16T06:37:36.000Z</updated>
+  <id>http://thundertrick.github.io/</id>
   
+  <author>
+    <name>Xuyang Hu</name>
+    
+  </author>
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
+  <generator uri="http://hexo.io/">Hexo</generator>
   
-  
-  
-  
-
-  
+  <entry>
+    <title>HEXO next 主题增加搜索引擎验证</title>
+    <link href="http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/"/>
+    <id>http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/</id>
+    <published>2016-08-16T04:20:19.000Z</published>
+    <updated>2016-08-16T06:37:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Github 上利用 hexo 建立的博客是无法被搜索引擎搜索到的。Github 本身也不会将信息提交给引擎。所以，为了让博客信息被检索到，我们需要手动将博客网站提交给搜索引擎并验证，实际上就是验证网站是我们自己的。对 hexo 比较友好的验证方法包括：</p>
+<ol>
+<li>文件验证：将一个 html 文件配置到 source 目录下，使之可以访问并获取其中的字符串。</li>
+<li>HTML meta 标签验证：在主页的 html 头里增加一个 meta 标签，记录搜索引擎提供的字符串。</li>
+</ol>
+<p>如果使用了 Next 主题，source 目录下所有的 html 都会按主题模板化，这使得文件验证生成的页面中字符串无法被搜索引擎识别。虽然理论上可以对单独的地址进行模板屏蔽，但一个网站冷不丁冒出来一个风格迥异的页面还是不能让人接受。所以，我最后选择了 HTML meta 标签验证方法。</p>
+<a id="more"></a>
+<p><a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Google 引擎验证申请地址</a><br><a href="http://www.baidu.com/search/url_submit.htm" target="_blank" rel="external">Baidu 引擎验证申请地址</a></p>
+<p>Next 主题下，页面的 header 设置在<code>themes/next/layout/_partials/head.swig</code>内。默认也给我们提供了模板，感谢<a href="https://github.com/iissnan" target="_blank" rel="external">开发者 iissnan</a>。我们只需要把下面标签补全即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;% if theme.google_site_verification %&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"IQs30MFrhmrm-Nfmv-_neEbXELyUuxvZtdin1ALJ4aA"</span> /&gt;</span></div><div class="line">&#123;% endif %&#125;</div><div class="line"></div><div class="line">&#123;% if theme.baidu_site_verification %&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"baidu-site-verification"</span> <span class="attr">content</span>=<span class="string">"H1J5y75sN7"</span> /&gt;</span></div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure>
+<p>同时，在<code>themes/next/_config.yml</code>中将<code>google-site-verification</code>和<code>baidu_site_verification</code>的值设置为<code>true</code>即可。</p>
+<p>P.S.<br>百度现在不支持 https 网址的验证，ORZ。</p>
+<p>Referrence:</p>
+<ol>
+<li><a href="http://www.jianshu.com/p/619dab2d3c08" target="_blank" rel="external">hexo干货系列：（六）hexo提交搜索引擎（百度+谷歌）</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Github 上利用 hexo 建立的博客是无法被搜索引擎搜索到的。Github 本身也不会将信息提交给引擎。所以，为了让博客信息被检索到，我们需要手动将博客网站提交给搜索引擎并验证，实际上就是验证网站是我们自己的。对 hexo 比较友好的验证方法包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;文件验证：将一个 html 文件配置到 source 目录下，使之可以访问并获取其中的字符串。&lt;/li&gt;
+&lt;li&gt;HTML meta 标签验证：在主页的 html 头里增加一个 meta 标签，记录搜索引擎提供的字符串。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果使用了 Next 主题，source 目录下所有的 html 都会按主题模板化，这使得文件验证生成的页面中字符串无法被搜索引擎识别。虽然理论上可以对单独的地址进行模板屏蔽，但一个网站冷不丁冒出来一个风格迥异的页面还是不能让人接受。所以，我最后选择了 HTML meta 标签验证方法。&lt;/p&gt;
+    
+    </summary>
     
     
+      <category term="Hexo" scheme="http://thundertrick.github.io/tags/Hexo/"/>
+    
+      <category term="Baidu" scheme="http://thundertrick.github.io/tags/Baidu/"/>
+    
+      <category term="Google" scheme="http://thundertrick.github.io/tags/Google/"/>
+    
+  </entry>
   
-
-  
-
-  
-
-  
-
-  
-
-  
+  <entry>
+    <title>Facebook Android SDK Tips Part 1 LikeView Bugs and Fixes</title>
+    <link href="http://thundertrick.github.io/2016/08/15/facebook-sdk-tips/"/>
+    <id>http://thundertrick.github.io/2016/08/15/facebook-sdk-tips/</id>
+    <published>2016-08-15T11:59:17.000Z</published>
+    <updated>2016-08-15T12:05:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Solutions for some bugs I met when using Facebook LikeView. The docs of Facebook SDK is totally #@!$#@!$!</p>
+<p>Official Reference: <a href="https://developers.facebook.com/docs/reference/android/current/class/LikeView" target="_blank" rel="external">LikeView Reference</a></p>
+<a id="more"></a>
+<p>##BUG 0x01: The developers or testers cannot access the Like Page</p>
+<ol>
+<li>Check the internet connection.</li>
+<li>Check if the page is allowed to be liked.</li>
+<li>Check the account of developers or testers have the permission of developer or tester under the APP ID.</li>
+<li>Check Facebook App support before initialize LikeView, and DO NOT just check the installation of Facebook App. For some lower version of Facebook App, things may not work properly. Using SDK for checking as following:</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">15</span>) &#123;</div><div class="line">    <span class="keyword">if</span> (LikeDialog.canShowNativeDialog() || LikeDialog.canShowWebFallback()) &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="BUG-0x02-Crash-when-initializing"><a href="#BUG-0x02-Crash-when-initializing" class="headerlink" title="BUG 0x02: Crash when initializing"></a>BUG 0x02: Crash when initializing</h2><ol>
+<li>DO NOT initialize LikeView in your layout.xml as the Official guide recommended, which is unsafe for API level &lt; 15. ( min version for FB SDK 4.10 ) All of the FB SDK method should be used after API level judgement.</li>
+<li>If you only want to open LikeDialog in Facebook App and only use <code>LikeDialog.canShowNativeDialog()</code> for judgement, LikeDialog may fail to open after swipe all the data of Facebook App. I recommend to use web dialog just in case.</li>
+</ol>
+<h2 id="BUG-0x03-Crash-in-onActivityResult"><a href="#BUG-0x03-Crash-in-onActivityResult" class="headerlink" title="BUG 0x03: Crash in onActivityResult()"></a>BUG 0x03: Crash in onActivityResult()</h2><p>Stack overflow give a way to get the like result in onActivityResult() method. But it should add a <code>data != null</code> judgment, otherwise app will crash when not data returns.</p>
+<h2 id="BUG-0x04-Native-Like-Button-permission"><a href="#BUG-0x04-Native-Like-Button-permission" class="headerlink" title="BUG 0x04: Native Like Button permission"></a>BUG 0x04: Native Like Button permission</h2><p>App Review should be done to get Native Like Button permission. Otherwise, only developers and test users can access like button.</p>
+<p>(Moved from <a href="http://huxyz.blogspot.com/2016/03/facebook-android-sdk-tips-part-1.html" target="_blank" rel="external">another blog site of my</a>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Solutions for some bugs I met when using Facebook LikeView. The docs of Facebook SDK is totally #@!$#@!$!&lt;/p&gt;
+&lt;p&gt;Official Reference: &lt;a href=&quot;https://developers.facebook.com/docs/reference/android/current/class/LikeView&quot;&gt;LikeView Reference&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android,Wi-Fi," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Magican" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-  <meta property="fb:admins" content="100002908541141" />
-  <meta property="fb:app_id" content="920274161435576" />
-
-
-
-<meta name="description" content="大纲
-Wifi传输概述
-WifiP2pManager类的介绍和使用
-Wifi热点创建相关技术
-基于Wifi的文件传输方法
-Demo的展示与介绍
-小结">
-<meta property="og:type" content="article">
-<meta property="og:title" content="安卓WiFi传输相关技术">
-<meta property="og:url" content="http://thundertrick.github.io/2016/07/29/android-wifi/index.html">
-<meta property="og:site_name" content="Magican">
-<meta property="og:description" content="大纲
-Wifi传输概述
-WifiP2pManager类的介绍和使用
-Wifi热点创建相关技术
-基于Wifi的文件传输方法
-Demo的展示与介绍
-小结">
-<meta property="og:updated_time" content="2016-07-29T10:15:43.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安卓WiFi传输相关技术">
-<meta name="twitter:description" content="大纲
-Wifi传输概述
-WifiP2pManager类的介绍和使用
-Wifi热点创建相关技术
-基于Wifi的文件传输方法
-Demo的展示与介绍
-小结">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: 'Author'
-    }
-  };
-</script>
-
-
-
-
-  <link rel="canonical" href="http://thundertrick.github.io/2016/07/29/android-wifi/"/>
-
-  <title> 安卓WiFi传输相关技术 | Magican </title>
-</head>
-
-
-<!-- custom analytics part create by xiamo -->
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("XmMsmFYHu9u3MkUuNtItcYMY-gzGzoHsz", "5a63LD2dhifD478tH3pChj0w");</script>
-<script>
-function showTime(Counter) {
-	var query = new AV.Query(Counter);
-	$(".leancloud_visitors").each(function() {
-		var url = $(this).attr("id").trim();
-		query.equalTo("url", url);
-		query.find({
-			success: function(results) {
-				if (results.length == 0) {
-					var content = '0 ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-					return;
-				}
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-				}
-			},
-			error: function(object, error) {
-				console.log("Error: " + error.code + " " + error.message);
-			}
-		});
-
-	});
-}
-
-function addCount(Counter) {
-	var Counter = AV.Object.extend("Counter");
-	url = $(".leancloud_visitors").attr('id').trim();
-	title = $(".leancloud_visitors").attr('data-flag-title').trim();
-	var query = new AV.Query(Counter);
-	query.equalTo("url", url);
-	query.find({
-		success: function(results) {
-			if (results.length > 0) {
-				var counter = results[0];
-				counter.fetchWhenSave(true);
-				counter.increment("time");
-				counter.save(null, {
-					success: function(counter) {
-						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(counter, error) {
-						console.log('Failed to save Visitor num, with error message: ' + error.message);
-					}
-				});
-			} else {
-				var newcounter = new Counter();
-				newcounter.set("title", title);
-				newcounter.set("url", url);
-				newcounter.set("time", 1);
-				newcounter.save(null, {
-					success: function(newcounter) {
-					    console.log("newcounter.get('time')="+newcounter.get('time'));
-						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(newcounter, error) {
-						console.log('Failed to create');
-					}
-				});
-			}
-		},
-		error: function(error) {
-			console.log('Error:' + error.code + " " + error.message);
-		}
-	});
-}
-$(function() {
-	var Counter = AV.Object.extend("Counter");
-	if ($('.leancloud_visitors').length == 1) {
-		addCount(Counter);
-	} else if ($('.post-title-link').length > 1) {
-		showTime(Counter);
-	}
-}); 
-</script>
-
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '920274161435576',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/zh_Hans/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
+      <category term="Android" scheme="http://thundertrick.github.io/tags/Android/"/>
     
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Magican</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">Programming is Magica</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-guestbook">
-          <a href="/guestbook" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            留言
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-rss">
-          <a href="/atom" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
-            
-            订阅
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+      <category term="Facebook" scheme="http://thundertrick.github.io/tags/Facebook/"/>
     
-
+  </entry>
   
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
+  <entry>
+    <title>Buck 安装配置与测试</title>
+    <link href="http://thundertrick.github.io/2016/08/12/buck-test/"/>
+    <id>http://thundertrick.github.io/2016/08/12/buck-test/</id>
+    <published>2016-08-12T11:40:32.000Z</published>
+    <updated>2016-08-15T11:55:26.000Z</updated>
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                安卓WiFi传输相关技术
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-29T18:10:38+08:00" content="2016-07-29">
-              2016-07-29
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/29/android-wifi/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/29/android-wifi/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-            &nbsp; | &nbsp;
-            <div class="fb-like" data-layout="button_count" data-share="true"></div>
-          
-
-          
-          
-             <span id="/2016/07/29/android-wifi/" class="leancloud_visitors" data-flag-title="安卓WiFi传输相关技术">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-              &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-              </span>
-          
-        </div>
-      </header>
+    <content type="html"><![CDATA[<blockquote>
+<p>Buck is a build system developed and used by Facebook. It encourages the creation of small, reusable modules consisting of code and resources, and supports a variety of languages on many platforms.</p>
+</blockquote>
+<p>Facebook 开源的东东，据说微信也在用。接手的项目以前是 Ant，现在转 Gradle。但由于项目本身携带了大量历史遗留代码，并且集合了数个 submodule，编译起来非常缓慢，拖延了开发效率。这里测试一下 Buck 替代的可能性。</p>
+<a id="more"></a>
+<h2 id="0x01-安装"><a href="#0x01-安装" class="headerlink" title="0x01 安装"></a>0x01 安装</h2><p>OS X 下使用 homebrew <a href="https://buckbuild.com/setup/install.html" target="_blank" rel="external">安装</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew tap facebook/fb</div><div class="line">brew install buck</div><div class="line">brew install watchman</div></pre></td></tr></table></figure>
+<p>Watchman 是 FB 强力推荐安装的，可以有效提高 Buck 的编译效率。此外，对于 Android 开发，我们还必须把 Android SDK 和 NDK 的路径告诉 Buck。设置方法只需配置好ANDROID_HOME，ANDROID_NDK，ANDROID_NDK_REPOSITORY 这几个环境变量即可，本文暂不累述。</p>
+<h2 id="0x02-创建本地配置"><a href="#0x02-创建本地配置" class="headerlink" title="0x02 创建本地配置"></a>0x02 创建本地配置</h2><p>… // TODO</p>
+]]></content>
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><ol>
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Buck is a build system developed and used by Facebook. It encourages the creation of small, reusable modules consisting of code and resources, and supports a variety of languages on many platforms.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Facebook 开源的东东，据说微信也在用。接手的项目以前是 Ant，现在转 Gradle。但由于项目本身携带了大量历史遗留代码，并且集合了数个 submodule，编译起来非常缓慢，拖延了开发效率。这里测试一下 Buck 替代的可能性。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://thundertrick.github.io/tags/Android/"/>
+    
+      <category term="Buck" scheme="http://thundertrick.github.io/tags/Buck/"/>
+    
+      <category term="Facebook" scheme="http://thundertrick.github.io/tags/Facebook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Effective Java - 1.1 类的创建</title>
+    <link href="http://thundertrick.github.io/2016/08/08/effectiv-java-1-1-1/"/>
+    <id>http://thundertrick.github.io/2016/08/08/effectiv-java-1-1-1/</id>
+    <published>2016-08-08T12:13:19.000Z</published>
+    <updated>2016-08-15T12:30:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。</p>
+<a id="more"></a>
+<h2 id="0x01-静态工厂方法"><a href="#0x01-静态工厂方法" class="headerlink" title="0x01 静态工厂方法"></a>0x01 静态工厂方法</h2><h3 id="1-方法示例："><a href="#1-方法示例：" class="headerlink" title="1. 方法示例："></a>1. 方法示例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> b ? Boolean.TRUE : Boolean.FALSE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-优点："><a href="#2-优点：" class="headerlink" title="2. 优点："></a>2. 优点：</h3><ol>
+<li><strong>有名称</strong>。构造器实际上只能用类名命名，无法更多地描述构造信息。并且实际使用中，同一个类常有数个不同的构造方法，如果不加以区分（缺少必要注释）则很容易使用错误。而静态工厂方法，可以使用方法名去描述构造实例的更多信息，易于区分。</li>
+<li><strong>不必每次调用都创建一个新的对象</strong>。重复调用可以利用好预先构建好的实例，从而减少了重复创建的开支。这点我目前的理解是静态工厂方法类内部可以调用其他的单例实例。</li>
+<li><strong>可以返回原类型的任何子类型</strong>。这样在选择返回对象时就有了更大的灵活性。</li>
+<li><strong>创建参数化实例时代码更加简洁</strong>。举例说明，原始代码：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, List&lt;String&gt;&gt; m = <span class="keyword">new</span> HashMap&lt;String, List&lt;String&gt;&gt;;</div></pre></td></tr></table></figure>
+<p>假设<code>HashMap</code>提供了这样的静态工厂方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K, V&gt; <span class="function">HashMap&lt;K, V&gt; <span class="title">newInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> HashMap&lt;K, V&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么原始代码就可以简化为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, List&lt;String&gt;&gt; m = HashMap.newInstance();</div></pre></td></tr></table></figure>
+<h3 id="3-缺点："><a href="#3-缺点：" class="headerlink" title="3. 缺点："></a>3. 缺点：</h3><ol>
+<li>类如果不含公有的或者受保护的构造器，就不能被子类化。</li>
+<li>与其他静态方法没有本质上的区别。这个主要是对JavaDoc不友好，无法像构造方法一样被标识。</li>
+</ol>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>静态工厂方法常用的方法名称如下：</p>
+<ol>
+<li><code>valueOf</code>, <code>of</code></li>
+<li><code>getInstance</code>, <code>newInstance</code></li>
+<li><code>getType</code>, <code>newType</code></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;获得一个实例最常见的方法就是构造器。但构造器并非在所有场景下都是最佳方案。本文收集几个特殊的构造方法以备需要。文中大部分内容源自 Joshua Bloch 的 Effective Java （second edition），实际上也是一个读书笔记。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://thundertrick.github.io/tags/Android/"/>
+    
+      <category term="Java" scheme="http://thundertrick.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安卓WiFi传输相关技术</title>
+    <link href="http://thundertrick.github.io/2016/07/29/android-wifi/"/>
+    <id>http://thundertrick.github.io/2016/07/29/android-wifi/</id>
+    <published>2016-07-29T10:10:38.000Z</published>
+    <updated>2016-07-29T10:15:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><ol>
 <li>Wifi传输概述</li>
 <li><code>WifiP2pManager</code>类的介绍和使用</li>
 <li>Wifi热点创建相关技术</li>
@@ -507,450 +247,53 @@ $(function() {
 <li>安卓网页的局限，浏览器对JS的支持性和PC端不同，需要额外设计</li>
 <li>部分安卓厂商自己修改了官方的热点API，比如HTC，这使得在这些手机上创建热点需要额外配置</li>
 </ol>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-            <a href="/tags/Wi-Fi/" rel="tag">#Wi-Fi</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/07/29/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/08/effectiv-java-1-1-1/" rel="prev" title="Effective Java - 1.1 类的创建">
-                Effective Java - 1.1 类的创建 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
+]]></content>
     
-      <div class="ds-thread" data-thread-key="2016/07/29/android-wifi/"
-           data-title="安卓WiFi传输相关技术" data-url="http://thundertrick.github.io/2016/07/29/android-wifi/">
-      </div>
+    <summary type="html">
     
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Xuyang Hu" />
-          <p class="site-author-name" itemprop="name">Xuyang Hu</p>
-          <p class="site-description motion-element" itemprop="description">Android & iOS & Python</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">8</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#大纲"><span class="nav-number">1.</span> <span class="nav-text">大纲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Wifi传输概述"><span class="nav-number">2.</span> <span class="nav-text">1. Wifi传输概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-步骤"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-应用"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-WifiP2pManager类的介绍和使用"><span class="nav-number">3.</span> <span class="nav-text">2. WifiP2pManager类的介绍和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-简介"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-初始化"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-对wifi-p2p-intent广播进行监听"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1 对wifi p2p intent广播进行监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-创建wifi-p2p应用"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2 创建wifi p2p应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-发现方法"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 发现方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Wifi热点创建相关技术"><span class="nav-number">4.</span> <span class="nav-text">3. Wifi热点创建相关技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-基于Wifi的文件传输方法"><span class="nav-number">5.</span> <span class="nav-text">4. 基于Wifi的文件传输方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-使用ServerSocket传输数据"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 使用ServerSocket传输数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-使用XMLHttpRequest在网页上实时获取下载进度"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 使用XMLHttpRequest在网页上实时获取下载进度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Demo的展示与介绍"><span class="nav-number">6.</span> <span class="nav-text">5. Demo的展示与介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-小结"><span class="nav-number">7.</span> <span class="nav-text">6. 小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-基于安卓的wifi传输-能做到什么-？"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 基于安卓的wifi传输 ==能做到什么==？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-基于安卓的wifi传输-不能做到什么-？-有哪些坑-？"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 基于安卓的wifi传输 ==不能做到什么==？==有哪些坑==？</span></a></li></ol></li></ol></div>
-            
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-<div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Xuyang Hu</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-<span id="busuanzi_container_site_pv">
-    Total visited <span id="busuanzi_value_site_pv"></span> times
-</span>
-
-        
-
-<div class="busuanzi-count">
-
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
-  
-
-  
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
-  
-</div>
-
-
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-  
+      &lt;h2 id=&quot;大纲&quot;&gt;&lt;a href=&quot;#大纲&quot; class=&quot;headerlink&quot; title=&quot;大纲&quot;&gt;&lt;/a&gt;大纲&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Wifi传输概述&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WifiP2pManager&lt;/code&gt;类的介绍和使用&lt;/li&gt;
+&lt;li&gt;Wifi热点创建相关技术&lt;/li&gt;
+&lt;li&gt;基于Wifi的文件传输方法&lt;/li&gt;
+&lt;li&gt;Demo的展示与介绍&lt;/li&gt;
+&lt;li&gt;小结&lt;/li&gt;
+&lt;/ol&gt;
     
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"thundertrick.duoshuo.com"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
+    </summary>
     
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+    
+      <category term="Android" scheme="http://thundertrick.github.io/tags/Android/"/>
+    
+      <category term="Wi-Fi" scheme="http://thundertrick.github.io/tags/Wi-Fi/"/>
+    
+  </entry>
   
-
-
-
-
-
-
+  <entry>
+    <title>Hello World</title>
+    <link href="http://thundertrick.github.io/2016/07/29/hello-world/"/>
+    <id>http://thundertrick.github.io/2016/07/29/hello-world/</id>
+    <published>2016-07-29T07:15:10.000Z</published>
+    <updated>2016-07-29T07:15:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
   
-  
-
-  
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("XmMsmFYHu9u3MkUuNtItcYMY-gzGzoHsz", "5a63LD2dhifD478tH3pChj0w");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
-</script>
-
-
-</body>
-</html>
+</feed>
