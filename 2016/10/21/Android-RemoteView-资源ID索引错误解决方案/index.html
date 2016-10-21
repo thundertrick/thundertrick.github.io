@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Xuyang, thunderlast, thundertrick" />
+  <meta name="keywords" content="Android,bugs," />
 
 
 
@@ -93,16 +93,19 @@
 
 
 
-<meta name="description" content="Free to leave something here ~~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="guestbook">
-<meta property="og:url" content="http://thundertrick.github.io/guestbook/index.html">
+<meta name="description" content="应用升级时如果替换了通知等 RemoteView 中的资源文件，则可能会导致新的升级包资源 id 发生变动，在部分机型上体现为android.app.RemoteServiceException。崩溃日志大致如下：
+123456789Bad notification posted from package com.mypkg.name: Couldn&amp;apos;t create icon: Sta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android RemoteView 资源ID索引错误解决方案">
+<meta property="og:url" content="http://thundertrick.github.io/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/index.html">
 <meta property="og:site_name" content="Magican">
-<meta property="og:description" content="Free to leave something here ~~">
-<meta property="og:updated_time" content="2016-08-15T12:10:56.000Z">
+<meta property="og:description" content="应用升级时如果替换了通知等 RemoteView 中的资源文件，则可能会导致新的升级包资源 id 发生变动，在部分机型上体现为android.app.RemoteServiceException。崩溃日志大致如下：
+123456789Bad notification posted from package com.mypkg.name: Couldn&amp;apos;t create icon: Sta">
+<meta property="og:updated_time" content="2016-10-21T07:28:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="guestbook">
-<meta name="twitter:description" content="Free to leave something here ~~">
+<meta name="twitter:title" content="Android RemoteView 资源ID索引错误解决方案">
+<meta name="twitter:description" content="应用升级时如果替换了通知等 RemoteView 中的资源文件，则可能会导致新的升级包资源 id 发生变动，在部分机型上体现为android.app.RemoteServiceException。崩溃日志大致如下：
+123456789Bad notification posted from package com.mypkg.name: Couldn&amp;apos;t create icon: Sta">
 
 
 
@@ -123,15 +126,9 @@
 
 
 
-  <link rel="canonical" href="http://thundertrick.github.io/guestbook/"/>
+  <link rel="canonical" href="http://thundertrick.github.io/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/"/>
 
-  <title>
-  
-
-  
-    guestbook | Magican
-  
-</title>
+  <title> Android RemoteView 资源ID索引错误解决方案 | Magican </title>
 </head>
 
 
@@ -255,7 +252,7 @@ $(function() {
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -355,15 +352,156 @@ $(function() {
 
   <div id="posts" class="posts-expand">
     
-    
-      <p>Free to leave something here ~~</p>
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
-    
-  <div class="comments" id="comments">
-    
-  </div>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android RemoteView 资源ID索引错误解决方案
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T14:42:39+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/Android-RemoteView-资源ID索引错误解决方案/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+            &nbsp; | &nbsp;
+            <div class="fb-like" data-layout="button_count" data-share="true"></div>
+          
+
+          
+          
+             <span id="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/" class="leancloud_visitors" data-flag-title="Android RemoteView 资源ID索引错误解决方案">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>应用升级时如果替换了通知等 RemoteView 中的资源文件，则可能会导致新的升级包资源 id 发生变动，在部分机型上体现为<code>android.app.RemoteServiceException</code>。崩溃日志大致如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Bad notification posted from package com.mypkg.name: Couldn&apos;t create icon: StatusBarIcon(pkg=com.mypkg.name user=0 id=0x7f0200dc level=0 visible=true num=0 )</div><div class="line">android.app.ActivityThread$H.handleMessage(ActivityThread.java:1638) </div><div class="line">android.os.Handler.dispatchMessage(Handler.java:111) </div><div class="line">android.os.Looper.loop(Looper.java:194) </div><div class="line">android.app.ActivityThread.main(ActivityThread.java:5637) </div><div class="line">java.lang.reflect.Method.invoke(Native Method) </div><div class="line">java.lang.reflect.Method.invoke(Method.java:372) </div><div class="line">com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:960) </div><div class="line">com.android.internal.os.ZygoteInit.main(ZygoteInit.java:755)</div></pre></td></tr></table></figure>
+<p>前段时间升级直接导致 crash 收集平台被该 bug 刷屏，而测试过程又一次都没有复现。<a href="http://stackoverflow.com/questions/31771204/bad-notification-posted-from-package" target="_blank" rel="external">StackOverFlow</a>  上也没有太好的解决方案。这里探索了一种固化资源 id 的解决方案，线上验证也是可行的，bug率明显下降。</p>
+<a id="more"></a>
+<p>通过反编译可以发现，Android App 会在 <code>res/values/public.xml</code> 里存储所有的资源文件名到资源文件 id 的映射关系。如果在编译前手动添加部分资源的 id 到 public.xml 下，那么这些资源的 id 就得以固化，升级以及添加修改资源都不会对这些 id 产生影响。此外，<code>res/values/ids.xml</code> 也起到了类似作用，只不过仅覆盖 id 资源。</p>
+<p>因此，解决思路应该是反编译 Apk 包，获得最新的<code>public.xml</code>，讲所有<code>RemoteView</code>涉及到的资源文件，包括<code>string, dimen, drawable, id, layout</code>等，提取出来并保存在项目源码中的<code>res/values/public.xml</code>和<code>res/values/ids.xml</code>文件中。</p>
+<p><strong><em>注意：Gradle 自 1.3.0 以后版本编译时会默认忽略本地的 <code>public.xml</code> 文件，因此还需要添加 Gradle 脚本使 <code>public.xml</code> 生效。打开 app 的 <code>build.gradle</code> 文件，在最后添加如下脚本 (<a href="http://blog.csdn.net/ceabie/article/details/50867791" target="_blank" rel="external">参考连接</a>中也提到了利用 Gradle 插件的解决方案)：</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">afterEvaluate &#123;</div><div class="line">    <span class="keyword">for</span> (variant in android.applicationVariants) &#123;</div><div class="line">        def scope = variant.getVariantData().getScope()</div><div class="line">        String mergeTaskName = scope.getMergeResourcesTask().name</div><div class="line">        def mergeTask = tasks.getByName(mergeTaskName)</div><div class="line"></div><div class="line">        mergeTask.doLast &#123;</div><div class="line">            copy &#123;</div><div class="line">                <span class="keyword">int</span> i=<span class="number">0</span></div><div class="line">                from(android.sourceSets.main.res.srcDirs) &#123;</div><div class="line">                    include <span class="string">'values/public.xml'</span></div><div class="line">                    rename <span class="string">'public.xml'</span>, (i++ == <span class="number">0</span>? <span class="string">"public.xml"</span>: <span class="string">"public_$&#123;i&#125;.xml"</span>)</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                into(mergeTask.outputDir)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="http://blog.csdn.net/ceabie/article/details/50867791" target="_blank" rel="external">android gradle plugin 1.3.0 以上使用 public.xml 固定 id</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/bugs/" rel="tag">#bugs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/16/hexo-search-engine-vertify/" rel="next" title="HEXO next 主题增加搜索引擎验证">
+                <i class="fa fa-chevron-left"></i> HEXO next 主题增加搜索引擎验证
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -374,8 +512,8 @@ $(function() {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="guestbook/index.html"
-           data-title="guestbook" data-url="http://thundertrick.github.io/guestbook/index.html">
+      <div class="ds-thread" data-thread-key="2016/10/21/Android-RemoteView-资源ID索引错误解决方案/"
+           data-title="Android RemoteView 资源ID索引错误解决方案" data-url="http://thundertrick.github.io/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/">
       </div>
     
   </div>
@@ -399,8 +537,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -450,6 +597,17 @@ $(function() {
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -569,6 +727,10 @@ $(function() {
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

@@ -370,6 +370,120 @@ $(function() {
             
               
                 
+                <a class="post-title-link" href="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/" itemprop="url">
+                  Android RemoteView 资源ID索引错误解决方案
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T14:42:39+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/Android-RemoteView-资源ID索引错误解决方案/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/" class="leancloud_visitors" data-flag-title="Android RemoteView 资源ID索引错误解决方案">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>应用升级时如果替换了通知等 RemoteView 中的资源文件，则可能会导致新的升级包资源 id 发生变动，在部分机型上体现为<code>android.app.RemoteServiceException</code>。崩溃日志大致如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Bad notification posted from package com.mypkg.name: Couldn&apos;t create icon: StatusBarIcon(pkg=com.mypkg.name user=0 id=0x7f0200dc level=0 visible=true num=0 )</div><div class="line">android.app.ActivityThread$H.handleMessage(ActivityThread.java:1638) </div><div class="line">android.os.Handler.dispatchMessage(Handler.java:111) </div><div class="line">android.os.Looper.loop(Looper.java:194) </div><div class="line">android.app.ActivityThread.main(ActivityThread.java:5637) </div><div class="line">java.lang.reflect.Method.invoke(Native Method) </div><div class="line">java.lang.reflect.Method.invoke(Method.java:372) </div><div class="line">com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:960) </div><div class="line">com.android.internal.os.ZygoteInit.main(ZygoteInit.java:755)</div></pre></td></tr></table></figure>
+<p>前段时间升级直接导致 crash 收集平台被该 bug 刷屏，而测试过程又一次都没有复现。<a href="http://stackoverflow.com/questions/31771204/bad-notification-posted-from-package">StackOverFlow</a>  上也没有太好的解决方案。这里探索了一种固化资源 id 的解决方案，线上验证也是可行的，bug率明显下降。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/16/hexo-search-engine-vertify/" itemprop="url">
                   HEXO next 主题增加搜索引擎验证
                 </a>
@@ -1084,7 +1198,7 @@ $(function() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1094,7 +1208,7 @@ $(function() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
