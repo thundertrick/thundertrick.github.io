@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thundertrick.github.io/"/>
-  <updated>2016-10-21T07:28:49.000Z</updated>
+  <updated>2016-10-31T02:41:10.000Z</updated>
   <id>http://thundertrick.github.io/</id>
   
   <author>
@@ -16,11 +16,54 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Mac 下 Paddlepaddle 安装配置</title>
+    <link href="http://thundertrick.github.io/2016/10/24/Mac-%E4%B8%8B-Paddlepaddle-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
+    <id>http://thundertrick.github.io/2016/10/24/Mac-下-Paddlepaddle-安装配置/</id>
+    <published>2016-10-24T07:37:04.000Z</published>
+    <updated>2016-10-31T02:41:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>百度新推出了<code>paddlepaddle</code>深度学习工具，目前官方还未支持 Mac 下 binary 安装。本文参考<a href="http://deeplearning.baidu.com/doc/build/build_from_source.html" target="_blank" rel="external">官方文档</a>，尝试使用源码本地编译安装尝尝鲜 (CPU Only)。</p>
+<a id="more"></a>
+<h2 id="依赖库"><a href="#依赖库" class="headerlink" title="依赖库"></a>依赖库</h2><ol>
+<li>cmake: <code>brew install cmake</code></li>
+<li>BLAS: Mac 系统下面的 vecLib 框架（Accelerate Frame）本身就集成了 Atlas的实现，直接使用即可</li>
+<li>protobuf: <code>brew install protobuf</code></li>
+<li>Python: Mac 自带 Python 2.7 和 numpy</li>
+</ol>
+<p>官方推荐安装：</p>
+<ol>
+<li>glog, gflags: <code>brew install glog gflags</code></li>
+<li>gtest:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Install google test on Mac OS X</div><div class="line"># Download gtest 1.7.0</div><div class="line">wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz</div><div class="line">tar -xvf googletest-release-1.7.0.tar.gz &amp;&amp; cd googletest-release-1.7.0</div><div class="line"># Build gtest</div><div class="line">mkdir build </div><div class="line">cd build</div><div class="line">cmake ..</div><div class="line">make</div><div class="line"># Install gtest library</div><div class="line">sudo cp -r ../include/gtest /usr/local/include/</div><div class="line">sudo cp lib*.a /usr/local/lib</div></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>todo: 编译提示缺失 BLAS：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">-- Found GTest: /usr/local/lib/libgtest.a  </div><div class="line">-- Found Sphinx: /Users/xuyang/anaconda/bin/sphinx-build  </div><div class="line">-- Could NOT find Doxygen (missing:  DOXYGEN_EXECUTABLE) </div><div class="line">CMake Error at cmake/cblas.cmake:127 (message):</div><div class="line">  CBlas must be set.  Paddle support MKL, ATLAS, OpenBlas, reference-cblas.</div><div class="line">  Try set MKL_ROOT, ATLAS_ROOT, OPENBLAS_ROOT or REFERENCE_CBLAS_ROOT.</div><div class="line">Call Stack (most recent call first):</div><div class="line">  CMakeLists.txt:26 (include)</div><div class="line"></div><div class="line"></div><div class="line">-- Configuring incomplete, errors occurred!</div><div class="line">See also &quot;/Users/xuyang/Desktop/work/paddle/build/CMakeFiles/CMakeOutput.log&quot;.</div></pre></td></tr></table></figure>
+<p>显然是没有引用默认路径，搜了一圈发现 vecLib.Framework 的路径在<code>/System/Library/Frameworks/Accelerate.framework/Versions/Current/Frameworks/vecLib.framework/Versions/A</code>。问题是怎么加到 ATLAS_ROOT 里呢？尝试添加<code>-DATLAS_ROOT=...</code>和设置环境变量<code>ATLAS_ROOT=...</code>均无效。官方建议的依赖安装是<code>brew install glog gflags cmake protobuf openblas</code>，看来是支持<code>openblas</code>的默认路径。所以索性替换为<code>openblas</code>。</p>
+<p>参考一篇<a href="http://blog.csdn.net/surgewong/article/details/43708339" target="_blank" rel="external">caffe的配置教程</a>，使用<code>brew install  homebrew/science/openblas</code>安装。</p>
+<p>// to be continued…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;百度新推出了&lt;code&gt;paddlepaddle&lt;/code&gt;深度学习工具，目前官方还未支持 Mac 下 binary 安装。本文参考&lt;a href=&quot;http://deeplearning.baidu.com/doc/build/build_from_source.html&quot;&gt;官方文档&lt;/a&gt;，尝试使用源码本地编译安装尝尝鲜 (CPU Only)。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="paddlepaddle" scheme="http://thundertrick.github.io/tags/paddlepaddle/"/>
+    
+      <category term="mac" scheme="http://thundertrick.github.io/tags/mac/"/>
+    
+      <category term="deep learning" scheme="http://thundertrick.github.io/tags/deep-learning/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android RemoteView 资源ID索引错误解决方案</title>
     <link href="http://thundertrick.github.io/2016/10/21/Android-RemoteView-%E8%B5%84%E6%BA%90ID%E7%B4%A2%E5%BC%95%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>http://thundertrick.github.io/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/</id>
     <published>2016-10-21T06:42:39.000Z</published>
-    <updated>2016-10-21T07:28:49.000Z</updated>
+    <updated>2016-10-21T10:09:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>应用升级时如果替换了通知等 RemoteView 中的资源文件，则可能会导致新的升级包资源 id 发生变动，在部分机型上体现为<code>android.app.RemoteServiceException</code>。崩溃日志大致如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Bad notification posted from package com.mypkg.name: Couldn&apos;t create icon: StatusBarIcon(pkg=com.mypkg.name user=0 id=0x7f0200dc level=0 visible=true num=0 )</div><div class="line">android.app.ActivityThread$H.handleMessage(ActivityThread.java:1638) </div><div class="line">android.os.Handler.dispatchMessage(Handler.java:111) </div><div class="line">android.os.Looper.loop(Looper.java:194) </div><div class="line">android.app.ActivityThread.main(ActivityThread.java:5637) </div><div class="line">java.lang.reflect.Method.invoke(Native Method) </div><div class="line">java.lang.reflect.Method.invoke(Method.java:372) </div><div class="line">com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:960) </div><div class="line">com.android.internal.os.ZygoteInit.main(ZygoteInit.java:755)</div></pre></td></tr></table></figure>
@@ -167,9 +210,9 @@
     
       <category term="Android" scheme="http://thundertrick.github.io/tags/Android/"/>
     
-      <category term="Buck" scheme="http://thundertrick.github.io/tags/Buck/"/>
-    
       <category term="Facebook" scheme="http://thundertrick.github.io/tags/Facebook/"/>
+    
+      <category term="Buck" scheme="http://thundertrick.github.io/tags/Buck/"/>
     
   </entry>
   
