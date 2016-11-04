@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thundertrick.github.io/"/>
-  <updated>2016-10-31T02:41:10.000Z</updated>
+  <updated>2016-11-04T04:02:55.000Z</updated>
   <id>http://thundertrick.github.io/</id>
   
   <author>
@@ -16,11 +16,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>使用MAC自带工具优化存储空间-OSX10.12</title>
+    <link href="http://thundertrick.github.io/2016/11/04/%E4%BD%BF%E7%94%A8MAC%E8%87%AA%E5%B8%A6%E5%B7%A5%E5%85%B7%E4%BC%98%E5%8C%96%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4/"/>
+    <id>http://thundertrick.github.io/2016/11/04/使用MAC自带工具优化存储空间/</id>
+    <published>2016-11-04T03:34:19.000Z</published>
+    <updated>2016-11-04T04:02:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>MAC的存储空间一直是使用者的心痛之处。之前使用腾讯的电脑管家清理空间，但是这个软件还是没法检测不用的大文件，清理分析能力都很有限。而其他功能更强的应用都要付费使用。今天偶然发现最新版本的MACOS Sierra（笔者系统10.12.1）提供了系统自带工具居然可以实现付费清理应用的所有功能。。。简直官方逼死同人，低配MAC的福音</p>
+<p>使用方法非常easy：</p>
+<ol>
+<li>进入应用程序 -&gt; 实用工具 -&gt; 系统信息。然后可以看到之前一直存在的系统信息界面；</li>
+<li>快捷键cmd+u, 或者点击窗口-&gt;存储空间管理，即可进入新的空间管理工具了<br><img src="http://upload-images.jianshu.io/upload_images/1918659-bc6b24bcb8cd8e98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+</ol>
+<p>打开工具后页面如下，看起来是为了推广icloud而增加的功能：<br><img src="http://upload-images.jianshu.io/upload_images/1918659-e3c742b877f00d30.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>最喜欢文件夹使用率的分析功能：<br><img src="http://upload-images.jianshu.io/upload_images/1918659-aab16864cc94a184.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;MAC的存储空间一直是使用者的心痛之处。之前使用腾讯的电脑管家清理空间，但是这个软件还是没法检测不用的大文件，清理分析能力都很有限。而其他功能更强的应用都要付费使用。今天偶然发现最新版本的MACOS Sierra（笔者系统10.12.1）提供了系统自带工具居然可以实现付费清
+    
+    </summary>
+    
+    
+      <category term="MAC" scheme="http://thundertrick.github.io/tags/MAC/"/>
+    
+      <category term="OS X" scheme="http://thundertrick.github.io/tags/OS-X/"/>
+    
+      <category term="Sierra" scheme="http://thundertrick.github.io/tags/Sierra/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Mac 下 Paddlepaddle 安装配置</title>
     <link href="http://thundertrick.github.io/2016/10/24/Mac-%E4%B8%8B-Paddlepaddle-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
     <id>http://thundertrick.github.io/2016/10/24/Mac-下-Paddlepaddle-安装配置/</id>
     <published>2016-10-24T07:37:04.000Z</published>
-    <updated>2016-10-31T02:41:10.000Z</updated>
+    <updated>2016-11-03T11:09:22.000Z</updated>
     
     <content type="html"><![CDATA[<p>百度新推出了<code>paddlepaddle</code>深度学习工具，目前官方还未支持 Mac 下 binary 安装。本文参考<a href="http://deeplearning.baidu.com/doc/build/build_from_source.html" target="_blank" rel="external">官方文档</a>，尝试使用源码本地编译安装尝尝鲜 (CPU Only)。</p>
 <a id="more"></a>
@@ -36,10 +68,17 @@
 <li>gtest:</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Install google test on Mac OS X</div><div class="line"># Download gtest 1.7.0</div><div class="line">wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz</div><div class="line">tar -xvf googletest-release-1.7.0.tar.gz &amp;&amp; cd googletest-release-1.7.0</div><div class="line"># Build gtest</div><div class="line">mkdir build </div><div class="line">cd build</div><div class="line">cmake ..</div><div class="line">make</div><div class="line"># Install gtest library</div><div class="line">sudo cp -r ../include/gtest /usr/local/include/</div><div class="line">sudo cp lib*.a /usr/local/lib</div></pre></td></tr></table></figure>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>todo: 编译提示缺失 BLAS：</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>按教程，编译命令很简单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake .. -DWITH_GPU=OFF -DWITH_DOC=ON -DWITH_SWIG_PY=ON</div></pre></td></tr></table></figure>
+<h3 id="bug-fix"><a href="#bug-fix" class="headerlink" title="bug fix:"></a>bug fix:</h3><ul>
+<li>bug1. 编译提示缺失 BLAS：</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">-- Found GTest: /usr/local/lib/libgtest.a  </div><div class="line">-- Found Sphinx: /Users/xuyang/anaconda/bin/sphinx-build  </div><div class="line">-- Could NOT find Doxygen (missing:  DOXYGEN_EXECUTABLE) </div><div class="line">CMake Error at cmake/cblas.cmake:127 (message):</div><div class="line">  CBlas must be set.  Paddle support MKL, ATLAS, OpenBlas, reference-cblas.</div><div class="line">  Try set MKL_ROOT, ATLAS_ROOT, OPENBLAS_ROOT or REFERENCE_CBLAS_ROOT.</div><div class="line">Call Stack (most recent call first):</div><div class="line">  CMakeLists.txt:26 (include)</div><div class="line"></div><div class="line"></div><div class="line">-- Configuring incomplete, errors occurred!</div><div class="line">See also &quot;/Users/xuyang/Desktop/work/paddle/build/CMakeFiles/CMakeOutput.log&quot;.</div></pre></td></tr></table></figure>
 <p>显然是没有引用默认路径，搜了一圈发现 vecLib.Framework 的路径在<code>/System/Library/Frameworks/Accelerate.framework/Versions/Current/Frameworks/vecLib.framework/Versions/A</code>。问题是怎么加到 ATLAS_ROOT 里呢？尝试添加<code>-DATLAS_ROOT=...</code>和设置环境变量<code>ATLAS_ROOT=...</code>均无效。官方建议的依赖安装是<code>brew install glog gflags cmake protobuf openblas</code>，看来是支持<code>openblas</code>的默认路径。所以索性替换为<code>openblas</code>。</p>
 <p>参考一篇<a href="http://blog.csdn.net/surgewong/article/details/43708339" target="_blank" rel="external">caffe的配置教程</a>，使用<code>brew install  homebrew/science/openblas</code>安装。</p>
+<ul>
+<li>bug2. </li>
+</ul>
 <p>// to be continued…</p>
 ]]></content>
     

@@ -96,7 +96,7 @@
 <meta property="og:url" content="http://thundertrick.github.io/2016/10/24/Mac-下-Paddlepaddle-安装配置/index.html">
 <meta property="og:site_name" content="Magican">
 <meta property="og:description" content="百度新推出了paddlepaddle深度学习工具，目前官方还未支持 Mac 下 binary 安装。本文参考官方文档，尝试使用源码本地编译安装尝尝鲜 (CPU Only)。">
-<meta property="og:updated_time" content="2016-10-31T02:41:10.000Z">
+<meta property="og:updated_time" content="2016-11-03T11:09:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac 下 Paddlepaddle 安装配置">
 <meta name="twitter:description" content="百度新推出了paddlepaddle深度学习工具，目前官方还未支持 Mac 下 binary 安装。本文参考官方文档，尝试使用源码本地编译安装尝尝鲜 (CPU Only)。">
@@ -422,10 +422,17 @@ $(function() {
 <li>gtest:</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Install google test on Mac OS X</div><div class="line"># Download gtest 1.7.0</div><div class="line">wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz</div><div class="line">tar -xvf googletest-release-1.7.0.tar.gz &amp;&amp; cd googletest-release-1.7.0</div><div class="line"># Build gtest</div><div class="line">mkdir build </div><div class="line">cd build</div><div class="line">cmake ..</div><div class="line">make</div><div class="line"># Install gtest library</div><div class="line">sudo cp -r ../include/gtest /usr/local/include/</div><div class="line">sudo cp lib*.a /usr/local/lib</div></pre></td></tr></table></figure>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>todo: 编译提示缺失 BLAS：</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>按教程，编译命令很简单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake .. -DWITH_GPU=OFF -DWITH_DOC=ON -DWITH_SWIG_PY=ON</div></pre></td></tr></table></figure>
+<h3 id="bug-fix"><a href="#bug-fix" class="headerlink" title="bug fix:"></a>bug fix:</h3><ul>
+<li>bug1. 编译提示缺失 BLAS：</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">-- Found GTest: /usr/local/lib/libgtest.a  </div><div class="line">-- Found Sphinx: /Users/xuyang/anaconda/bin/sphinx-build  </div><div class="line">-- Could NOT find Doxygen (missing:  DOXYGEN_EXECUTABLE) </div><div class="line">CMake Error at cmake/cblas.cmake:127 (message):</div><div class="line">  CBlas must be set.  Paddle support MKL, ATLAS, OpenBlas, reference-cblas.</div><div class="line">  Try set MKL_ROOT, ATLAS_ROOT, OPENBLAS_ROOT or REFERENCE_CBLAS_ROOT.</div><div class="line">Call Stack (most recent call first):</div><div class="line">  CMakeLists.txt:26 (include)</div><div class="line"></div><div class="line"></div><div class="line">-- Configuring incomplete, errors occurred!</div><div class="line">See also &quot;/Users/xuyang/Desktop/work/paddle/build/CMakeFiles/CMakeOutput.log&quot;.</div></pre></td></tr></table></figure>
 <p>显然是没有引用默认路径，搜了一圈发现 vecLib.Framework 的路径在<code>/System/Library/Frameworks/Accelerate.framework/Versions/Current/Frameworks/vecLib.framework/Versions/A</code>。问题是怎么加到 ATLAS_ROOT 里呢？尝试添加<code>-DATLAS_ROOT=...</code>和设置环境变量<code>ATLAS_ROOT=...</code>均无效。官方建议的依赖安装是<code>brew install glog gflags cmake protobuf openblas</code>，看来是支持<code>openblas</code>的默认路径。所以索性替换为<code>openblas</code>。</p>
 <p>参考一篇<a href="http://blog.csdn.net/surgewong/article/details/43708339" target="_blank" rel="external">caffe的配置教程</a>，使用<code>brew install  homebrew/science/openblas</code>安装。</p>
+<ul>
+<li>bug2. </li>
+</ul>
 <p>// to be continued…</p>
 
       
@@ -469,6 +476,10 @@ $(function() {
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/04/使用MAC自带工具优化存储空间/" rel="prev" title="使用MAC自带工具优化存储空间-OSX10.12">
+                使用MAC自带工具优化存储空间-OSX10.12 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -559,7 +570,7 @@ $(function() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -569,7 +580,7 @@ $(function() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -605,7 +616,7 @@ $(function() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖库"><span class="nav-number">1.</span> <span class="nav-text">依赖库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译"><span class="nav-number">2.</span> <span class="nav-text">编译</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖库"><span class="nav-number">1.</span> <span class="nav-text">依赖库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译"><span class="nav-number">2.</span> <span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bug-fix"><span class="nav-number">2.1.</span> <span class="nav-text">bug fix:</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
