@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thundertrick.github.io/"/>
-  <updated>2016-11-04T04:02:55.000Z</updated>
+  <updated>2016-11-04T04:43:46.000Z</updated>
   <id>http://thundertrick.github.io/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://thundertrick.github.io/2016/11/04/%E4%BD%BF%E7%94%A8MAC%E8%87%AA%E5%B8%A6%E5%B7%A5%E5%85%B7%E4%BC%98%E5%8C%96%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4/"/>
     <id>http://thundertrick.github.io/2016/11/04/使用MAC自带工具优化存储空间/</id>
     <published>2016-11-04T03:34:19.000Z</published>
-    <updated>2016-11-04T04:02:55.000Z</updated>
+    <updated>2016-11-04T04:43:46.000Z</updated>
     
     <content type="html"><![CDATA[<p>MAC的存储空间一直是使用者的心痛之处。之前使用腾讯的电脑管家清理空间，但是这个软件还是没法检测不用的大文件，清理分析能力都很有限。而其他功能更强的应用都要付费使用。今天偶然发现最新版本的MACOS Sierra（笔者系统10.12.1）提供了系统自带工具居然可以实现付费清理应用的所有功能。。。简直官方逼死同人，低配MAC的福音</p>
+<a id="more"></a>
 <p>使用方法非常easy：</p>
 <ol>
 <li>进入应用程序 -&gt; 实用工具 -&gt; 系统信息。然后可以看到之前一直存在的系统信息界面；</li>
@@ -34,7 +35,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;MAC的存储空间一直是使用者的心痛之处。之前使用腾讯的电脑管家清理空间，但是这个软件还是没法检测不用的大文件，清理分析能力都很有限。而其他功能更强的应用都要付费使用。今天偶然发现最新版本的MACOS Sierra（笔者系统10.12.1）提供了系统自带工具居然可以实现付费清
+      &lt;p&gt;MAC的存储空间一直是使用者的心痛之处。之前使用腾讯的电脑管家清理空间，但是这个软件还是没法检测不用的大文件，清理分析能力都很有限。而其他功能更强的应用都要付费使用。今天偶然发现最新版本的MACOS Sierra（笔者系统10.12.1）提供了系统自带工具居然可以实现付费清理应用的所有功能。。。简直官方逼死同人，低配MAC的福音&lt;/p&gt;
     
     </summary>
     
