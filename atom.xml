@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thundertrick.github.io/"/>
-  <updated>2016-11-04T06:04:29.000Z</updated>
+  <updated>2016-11-08T03:54:37.000Z</updated>
   <id>http://thundertrick.github.io/</id>
   
   <author>
@@ -20,32 +20,63 @@
     <link href="http://thundertrick.github.io/2016/10/24/Mac-%E4%B8%8B-Paddlepaddle-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
     <id>http://thundertrick.github.io/2016/10/24/Mac-下-Paddlepaddle-安装配置/</id>
     <published>2016-10-24T07:37:04.000Z</published>
-    <updated>2016-11-04T06:04:29.000Z</updated>
+    <updated>2016-11-08T03:54:37.000Z</updated>
     
-    <content type="html"><![CDATA[<p>百度新推出了<code>paddlepaddle</code>深度学习工具，目前官方还未支持 Mac 下 binary 安装。本文参考<a href="http://deeplearning.baidu.com/doc/build/build_from_source.html" target="_blank" rel="external">官方文档</a>，尝试使用源码本地编译安装尝尝鲜 (CPU Only)。</p>
+    <content type="html"><![CDATA[<p>百度新推出了<code>paddlepaddle</code>深度学习工具，目前官方还未支持 Mac 下 binary 安装。参考<a href="http://www.paddlepaddle.org/doc/build/index.html" target="_blank" rel="external">最新官方文档</a>，笔者先基于源码编译安装，发现 BLAS 依赖是个非常麻烦的坑，最后使用官方推荐的 docker 镜像方式进行安装。</p>
 <a id="more"></a>
-<h2 id="依赖库"><a href="#依赖库" class="headerlink" title="依赖库"></a>依赖库</h2><ol>
-<li>cmake: <code>brew install cmake</code></li>
-<li>BLAS: Mac 系统下面的 vecLib 框架（Accelerate Frame）本身就集成了 Atlas的实现，直接使用即可</li>
-<li>protobuf: <code>brew install protobuf</code></li>
-<li>Python: Mac 自带 Python 2.7 和 numpy</li>
-</ol>
-<p>官方推荐安装：</p>
 <ol>
-<li>glog, gflags: <code>brew install glog gflags</code></li>
-<li>gtest:</li>
+<li>参照官网安装 <a href="https://docs.docker.com/docker-for-mac/" target="_blank" rel="external">Docker for Mac</a>，傻瓜式安装非常简单，不再累述；</li>
+<li><p>判断本地 CPU 是否支持 <code>AVX</code>指令集：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if cat /proc/cpuinfo | grep -q avx ; then echo &quot;Support AVX&quot;; else echo &quot;Not support AVX&quot;; fi</div></pre></td></tr></table></figure>
+</li>
+<li><p>根据是否支持 <code>AVX</code> 选择镜像下载：</p>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Install google test on Mac OS X</div><div class="line"># Download gtest 1.7.0</div><div class="line">wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz</div><div class="line">tar -xvf googletest-release-1.7.0.tar.gz &amp;&amp; cd googletest-release-1.7.0</div><div class="line"># Build gtest</div><div class="line">mkdir build </div><div class="line">cd build</div><div class="line">cmake ..</div><div class="line">make</div><div class="line"># Install gtest library</div><div class="line">sudo cp -r ../include/gtest /usr/local/include/</div><div class="line">sudo cp lib*.a /usr/local/lib</div></pre></td></tr></table></figure>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>todo: 编译提示缺失 BLAS：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">-- Found GTest: /usr/local/lib/libgtest.a  </div><div class="line">-- Found Sphinx: /Users/xuyang/anaconda/bin/sphinx-build  </div><div class="line">-- Could NOT find Doxygen (missing:  DOXYGEN_EXECUTABLE) </div><div class="line">CMake Error at cmake/cblas.cmake:127 (message):</div><div class="line">  CBlas must be set.  Paddle support MKL, ATLAS, OpenBlas, reference-cblas.</div><div class="line">  Try set MKL_ROOT, ATLAS_ROOT, OPENBLAS_ROOT or REFERENCE_CBLAS_ROOT.</div><div class="line">Call Stack (most recent call first):</div><div class="line">  CMakeLists.txt:26 (include)</div><div class="line"></div><div class="line"></div><div class="line">-- Configuring incomplete, errors occurred!</div><div class="line">See also &quot;/Users/xuyang/Desktop/work/paddle/build/CMakeFiles/CMakeOutput.log&quot;.</div></pre></td></tr></table></figure>
-<p>显然是没有引用默认路径，搜了一圈发现 vecLib.Framework 的路径在<code>/System/Library/Frameworks/Accelerate.framework/Versions/Current/Frameworks/vecLib.framework/Versions/A</code>。问题是怎么加到 ATLAS_ROOT 里呢？尝试添加<code>-DATLAS_ROOT=...</code>和设置环境变量<code>ATLAS_ROOT=...</code>均无效。官方建议的依赖安装是<code>brew install glog gflags cmake protobuf openblas</code>，看来是支持<code>openblas</code>的默认路径。所以索性替换为<code>openblas</code>。</p>
-<p>参考一篇<a href="http://blog.csdn.net/surgewong/article/details/43708339" target="_blank" rel="external">caffe的配置教程</a>，使用<code>brew install  homebrew/science/openblas</code>安装。</p>
-<p>// to be continued…</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>normal</th>
+<th>devel</th>
+<th>demo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>cpu-latest</td>
+<td>cpu-devel-latest</td>
+<td>cpu-demo-latest</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>gpu-latest</td>
+<td>gpu-devel-latest</td>
+<td>gpu-demo-latest</td>
+</tr>
+<tr>
+<td>CPU WITHOUT AVX</td>
+<td>cpu-noavx-latest</td>
+<td>cpu-noavx-devel-latest</td>
+<td>cpu-noavx-demo-latest</td>
+</tr>
+<tr>
+<td>GPU WITHOUT AVX</td>
+<td>gpu-noavx-latest</td>
+<td>gpu-noavx-devel-latest</td>
+<td>gpu-noavx-demo-latest</td>
+</tr>
+</tbody>
+</table>
+<p>虽然新版的文档只有6个镜像，但实际上上述表格中所有镜像都在同步更新（<a href="https://hub.docker.com/r/paddledev/paddle/tags/" target="_blank" rel="external">地址</a>）。 没有本文选择<code>cpu-noavx-latest</code>下载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ docker pull paddledev/paddle:cpu-noavx-latest</div><div class="line">$ docker run -it paddledev/paddle:cpu-noavx-latest </div><div class="line">root@c9eea5b52828:/# paddle version</div><div class="line">PaddlePaddle 0.8.0b3, compiled with</div><div class="line">    with_avx: OFF</div><div class="line">    with_gpu: OFF</div><div class="line">    with_double: OFF</div><div class="line">    with_python: ON</div><div class="line">    with_rdma: OFF</div><div class="line">    with_glog: ON</div><div class="line">    with_gflags: ON</div><div class="line">    with_metric_learning: </div><div class="line">    with_timer: OFF</div><div class="line">    with_predict_sdk:</div></pre></td></tr></table></figure></p>
+<p>安装成功！</p>
+<p>##注意：<br><a href="http://deeplearning.baidu.com/doc/build/build_from_source.html" target="_blank" rel="external">旧版官网</a>上提到的镜像下载语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -it paddledev/paddlepaddle:cpu-latest</div></pre></td></tr></table></figure></p>
+<p>是<strong>错的！！！</strong>。仓库路径应该为<code>paddledev/paddle</code>，而非<code>paddledev/paddlepaddle</code>。这个小问题折腾了我很久，希望对读者有所帮助。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;百度新推出了&lt;code&gt;paddlepaddle&lt;/code&gt;深度学习工具，目前官方还未支持 Mac 下 binary 安装。本文参考&lt;a href=&quot;http://deeplearning.baidu.com/doc/build/build_from_source.html&quot;&gt;官方文档&lt;/a&gt;，尝试使用源码本地编译安装尝尝鲜 (CPU Only)。&lt;/p&gt;
+      &lt;p&gt;百度新推出了&lt;code&gt;paddlepaddle&lt;/code&gt;深度学习工具，目前官方还未支持 Mac 下 binary 安装。参考&lt;a href=&quot;http://www.paddlepaddle.org/doc/build/index.html&quot;&gt;最新官方文档&lt;/a&gt;，笔者先基于源码编译安装，发现 BLAS 依赖是个非常麻烦的坑，最后使用官方推荐的 docker 镜像方式进行安装。&lt;/p&gt;
     
     </summary>
     
