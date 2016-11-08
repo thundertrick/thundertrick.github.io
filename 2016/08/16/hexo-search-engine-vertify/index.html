@@ -6,15 +6,17 @@
 <p>如果使用了 Next 主题，source 目录下所有的 html 都会按主题模板化，这使得文件验证生成的页面中字符串无法被搜索引擎识别。虽然理论上可以对单独的地址进行模板屏蔽，但一个网站冷不丁冒出来一个风格迥异的页面还是不能让人接受。所以，我最后选择了 HTML meta 标签验证方法。</p>
 <a id="more"></a>
 <p><a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Google 引擎验证申请地址</a><br><a href="http://www.baidu.com/search/url_submit.htm" target="_blank" rel="external">Baidu 引擎验证申请地址</a></p>
-<p>Next 主题下，页面的 header 设置在<code>themes/next/layout/_partials/head.swig</code>内。默认也给我们提供了模板，感谢<a href="https://github.com/iissnan" target="_blank" rel="external">开发者 iissnan</a>。我们只需要把下面标签补全即可：</p>
+<p><del>Next 主题下，页面的 header 设置在<code>themes/next/layout/_partials/head.swig</code>内。默认也给我们提供了模板，感谢<a href="https://github.com/iissnan" target="_blank" rel="external">开发者 iissnan</a>。我们只需要把下面标签补全即可：</del></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;% if theme.google_site_verification %&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"IQs30MFrhmrm-Nfmv-_neEbXELyUuxvZtdin1ALJ4aA"</span> /&gt;</span></div><div class="line">&#123;% endif %&#125;</div><div class="line"></div><div class="line">&#123;% if theme.baidu_site_verification %&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"baidu-site-verification"</span> <span class="attr">content</span>=<span class="string">"H1J5y75sN7"</span> /&gt;</span></div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure>
-<p>同时，在<code>themes/next/_config.yml</code>中将<code>google-site-verification</code>和<code>baidu_site_verification</code>的值设置为<code>true</code>即可。</p>
+<p><del>同时，在<code>themes/next/_config.yml</code>中将<code>google-site-verification</code>和<code>baidu_site_verification</code>的值设置为<code>true</code>即可。</del></p>
 <p>P.S.<br>百度现在不支持 https 网址的验证，ORZ。</p>
+<hr>
+<p>感谢<a href="http://weibo.com/2284890987" target="_blank" rel="external">@小硕硕</a> 的提醒，更正确的方法是在<code>_config.xml</code>里直接定义<code>google-site-verification</code>和<code>baidu_site_verification</code>的值为相应id。</p>
 <p>Referrence:</p>
 <ol>
 <li><a href="http://www.jianshu.com/p/619dab2d3c08" target="_blank" rel="external">hexo干货系列：（六）hexo提交搜索引擎（百度+谷歌）</a></li>
 </ol>
-</div></article></div></section><footer><div class="paginator"><a href="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/" class="prev">上一篇</a><a href="/2016/08/15/facebook-sdk-tips/" class="next">下一篇</a></div><div data-thread-key="2016/08/16/hexo-search-engine-vertify/" data-title="HEXO next 主题增加搜索引擎验证" data-url="http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"thundertrick"};
+</div></article></div></section><footer><div class="paginator"><a href="/2016/10/21/Android-RemoteView-资源ID索引错误解决方案/" class="prev">PREV</a><a href="/2016/08/15/facebook-sdk-tips/" class="next">NEXT</a></div><div data-thread-key="2016/08/16/hexo-search-engine-vertify/" data-title="HEXO next 主题增加搜索引擎验证" data-url="http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"thundertrick"};
 (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
