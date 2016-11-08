@@ -130,7 +130,7 @@
     <link href="http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/"/>
     <id>http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/</id>
     <published>2016-08-16T04:20:19.000Z</published>
-    <updated>2016-11-08T04:48:13.000Z</updated>
+    <updated>2016-11-08T04:58:58.000Z</updated>
     
     <content type="html"><![CDATA[<p>Github 上利用 hexo 建立的博客是无法被搜索引擎搜索到的。Github 本身也不会将信息提交给引擎。所以，为了让博客信息被检索到，我们需要手动将博客网站提交给搜索引擎并验证，实际上就是验证网站是我们自己的。对 hexo 比较友好的验证方法包括：</p>
 <ol>
@@ -145,7 +145,7 @@
 <p><del>同时，在<code>themes/next/_config.yml</code>中将<code>google-site-verification</code>和<code>baidu_site_verification</code>的值设置为<code>true</code>即可。</del></p>
 <p>P.S.<br>百度现在不支持 https 网址的验证，ORZ。</p>
 <hr>
-<p>感谢<a href="http://weibo.com/2284890987" target="_blank" rel="external">@小硕硕</a> 的提醒，更正确的方法是在<code>_config.xml</code>里直接定义<code>google-site-verification</code>和<code>baidu_site_verification</code>的值为相应id。</p>
+<p>感谢<a href="http://weibo.com/2284890987" target="_blank" rel="external">@小硕硕_</a> 的提醒，更正确的方法是在<code>_config.xml</code>里直接定义<code>google-site-verification</code>和<code>baidu_site_verification</code>的值为相应id。</p>
 <p>Referrence:</p>
 <ol>
 <li><a href="http://www.jianshu.com/p/619dab2d3c08" target="_blank" rel="external">hexo干货系列：（六）hexo提交搜索引擎（百度+谷歌）</a></li>
