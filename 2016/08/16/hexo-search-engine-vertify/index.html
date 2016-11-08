@@ -88,6 +88,9 @@
 
 
 
+  <meta property="fb:admins" content="100002908541141" />
+  <meta property="fb:app_id" content="920274161435576" />
+
 
 
 <meta name="description" content="Github 上利用 hexo 建立的博客是无法被搜索引擎搜索到的。Github 本身也不会将信息提交给引擎。所以，为了让博客信息被检索到，我们需要手动将博客网站提交给搜索引擎并验证，实际上就是验证网站是我们自己的。对 hexo 比较友好的验证方法包括：
@@ -120,8 +123,8 @@ HTML meta 标签验证：在主页的 htm">
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 3712769,
-      author: 'Author'
+      userId: 0,
+      author: '博主'
     }
   };
 </script>
@@ -222,6 +225,24 @@ $(function() {
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '920274161435576',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/zh_Hans/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 
 
 
@@ -302,7 +323,7 @@ $(function() {
         <li class="menu-item menu-item-guestbook">
           <a href="/guestbook" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             留言
           </a>
@@ -380,12 +401,15 @@ $(function() {
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/2016/08/16/hexo-search-engine-vertify/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/16/hexo-search-engine-vertify/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/16/hexo-search-engine-vertify/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
           
 
+          
+            &nbsp; | &nbsp;
+            <div class="fb-like" data-layout="button_count" data-share="true"></div>
           
 
           
@@ -400,11 +424,6 @@ $(function() {
               </span>
           
 
-          
-              &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-              </span>
           
         </div>
       </header>
@@ -493,25 +512,6 @@ $(function() {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/08/16/hexo-search-engine-vertify/"
-     data-title="HEXO next 主题增加搜索引擎验证"
-     data-content=""
-     data-url="http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -523,8 +523,9 @@ $(function() {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/16/hexo-search-engine-vertify/"
-           data-title="HEXO next 主题增加搜索引擎验证" data-url="http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/">
+      <div class="fb-comments"
+           data-href="http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/"
+           data-numposts="10">
       </div>
     
   </div>
@@ -661,22 +662,6 @@ $(function() {
 
         
 
-<div class="busuanzi-count">
-
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
-  
-
-  
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
-  
-</div>
-
-
-
         
       </div>
     </footer>
@@ -752,30 +737,30 @@ $(function() {
 
   
 
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"thundertrick"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'http-thundertrick-github-io';
+      var disqus_identifier = '2016/08/16/hexo-search-engine-vertify/';
+      var disqus_title = "HEXO next 主题增加搜索引擎验证";
+      var disqus_url = 'http://thundertrick.github.io/2016/08/16/hexo-search-engine-vertify/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
 
 
 
